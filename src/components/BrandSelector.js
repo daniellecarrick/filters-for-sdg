@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react"
-import { useSession } from "dash-component-library/context"
+import { useSession } from "../context"
 import { qAskReplay, invalidations } from "rxq"
 import { Subject } from "rxjs"
-import { map, tap, withLatestFrom, switchMap } from "rxjs/operators"
+import { map, tap, withLatestFrom, switchMap, take } from "rxjs/operators"
 import withStyles from "react-jss"
 import classNames from "classnames"
 import * as brandImages from "../resources/images/brands"
@@ -89,10 +89,18 @@ export default withStyles(styles)(
 				.subscribe()
 
 			return () => {
+				brandListObj$
+					.pipe(
+						qAskReplay("GetProperties"),
+						map(props => props.qInfo.qId),
+						switchMap(id => doc$.pipe(qAskReplay("DestroySessionObject", id))),
+						take(1)
+					)
+					.subscribe()
 				brandLayout$.unsubscribe()
 				selectionSub$.unsubscribe()
 			}
-		}, [doc$, selectBrand$])
+		}, [doc$, selectBrand$, field])
 
 		return (
 			<div className={classNames(classes.brandDropdown__container, className)}>
