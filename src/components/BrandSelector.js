@@ -11,14 +11,6 @@ const styles = {
 	brandDropdown: {
 		marginRight: "10px",
 	},
-	brandDropdown__container: {
-		position: "absolute",
-		padding: "20px 20px 30px",
-		width: "300px",
-		textAlign: "center",
-		backgroundColor: "#343a40",
-		zIndex: 10,
-	},
 	brandDropdown__input: {
 		width: "90px",
 		height: "50px",

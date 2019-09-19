@@ -12,6 +12,10 @@ const styles = {
 	},
 	dropdownContainer: {
 		position: "absolute",
+		padding: "20px 20px 30px",
+		width: "300px",
+		textAlign: "center",
+		backgroundColor: "#343a40",
 		zIndex: 10,
 	},
 	dropdownContainer_hidden: { display: "none" },
