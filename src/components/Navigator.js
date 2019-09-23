@@ -74,6 +74,8 @@ export default withStyles(styles)(({ positions, className, classes }) => {
 	useEffect(() => {
 		if (refPositions.length) {
 			if (refPositions[0].y > 0) setSelectedPosition(0)
+			else if (refPositions[refPositions.length - 1].y <= 0)
+				setSelectedPosition(refPositions[refPositions.length - 1].id)
 			else {
 				setSelectedPosition(refPositions.find(pos => pos.y > 0).id - 1)
 			}
