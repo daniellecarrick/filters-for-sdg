@@ -13,40 +13,42 @@ const styles = {
 	clearButton__refreshIcon: { width: "12px" },
 }
 
-export default withStyles(styles)(({ className, classes }) => {
-	const {
-		rxq: { doc$ },
-	} = useSession()[0]
+export default withStyles(styles)(
+	({ onClear = () => {}, className, classes }) => {
+		const {
+			rxq: { doc$ },
+		} = useSession()[0]
 
-	const clear$ = useRef(new Subject()).current
-	useEffect(() => {
-		const sub$ = clear$
-			.pipe(
-				withLatestFrom(doc$),
-				pluck(1),
-				qAskReplay("ClearAll")
-			)
-			.subscribe()
+		const clear$ = useRef(new Subject()).current
+		useEffect(() => {
+			const sub$ = clear$
+				.pipe(
+					withLatestFrom(doc$),
+					pluck(1),
+					qAskReplay("ClearAll")
+				)
+				.subscribe(() => onClear())
 
-		return () => sub$.unsubscribe()
-	}, [clear$, doc$])
+			return () => sub$.unsubscribe()
+		}, [clear$, doc$])
 
-	return (
-		<Button
-			theme="light"
-			className={classNames("clear-button", className, classes.clearButton)}
-			Icon={
-				<img
-					className={classNames(
-						"clear-button__refresh-icon",
-						classes.clearButton__refreshIcon
-					)}
-					src={refresh}
-				/>
-			}
-			onClick={() => clear$.next()}
-		>
-			Clear Filters
-		</Button>
-	)
-})
+		return (
+			<Button
+				theme="light"
+				className={classNames("clear-button", className, classes.clearButton)}
+				Icon={
+					<img
+						className={classNames(
+							"clear-button__refresh-icon",
+							classes.clearButton__refreshIcon
+						)}
+						src={refresh}
+					/>
+				}
+				onClick={() => clear$.next()}
+			>
+				Clear Filters
+			</Button>
+		)
+	}
+)
