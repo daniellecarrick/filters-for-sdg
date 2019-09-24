@@ -30,7 +30,7 @@ const styles = {
 }
 
 export default withStyles(styles)(
-	({ field, setSelectedBrand = () => {}, className, classes }) => {
+	({ field, setSelectedBrand = () => {}, fieldMap, className, classes }) => {
 		const {
 			rxq: { doc$ },
 		} = useSession()[0]
@@ -63,6 +63,14 @@ export default withStyles(styles)(
 							selectionState: row[0].qState,
 						}))
 					),
+					map(brandList => {
+						if (fieldMap)
+							return brandList.map(brand => ({
+								...brand,
+								code: fieldMap[brand.code],
+							}))
+						else return brandList
+					}),
 					tap(brandList => {
 						const selectedBrand = brandList.find(
 							brand => brand.selectionState === "S"
