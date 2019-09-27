@@ -10,6 +10,7 @@ export default ({ app } = {}) => {
 	} = app ? sessions.find(session => session.name === app) : sessions[0]
 
 	const set$ = useRef(new Subject()).current
+	const success$ = useRef(new Subject()).current
 
 	useEffect(() => {
 		const sub$ = set$
@@ -19,12 +20,15 @@ export default ({ app } = {}) => {
 					docHandle.ask("ApplyBookmark", bookmarkId).pipe(retry(3))
 				)
 			)
-			.subscribe()
+			.subscribe(() => success$.next())
 
 		return () => sub$.unsubscribe()
-	}, [doc$])
+	}, [doc$, success$])
 
-	const setBookmark = id => set$.next(id)
+	const setBookmark = id => {
+		set$.next(id)
+		return success$
+	}
 
 	return { setBookmark }
 }
