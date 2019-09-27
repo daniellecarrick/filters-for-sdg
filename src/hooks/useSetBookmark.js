@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useSession } from "dash-component-library/context"
-import { combineLatest, switchMap } from "rxjs/operators"
+import { combineLatest, switchMap, retry } from "rxjs/operators"
 import { Subject } from "rxjs"
 
 export default ({ app } = {}) => {
