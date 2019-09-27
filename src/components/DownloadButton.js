@@ -1,6 +1,12 @@
 import React, { useRef, useEffect } from "react"
 import { Subject, from } from "rxjs"
-import { switchMap, withLatestFrom, mergeMap, catchError } from "rxjs/operators"
+import {
+	switchMap,
+	withLatestFrom,
+	mergeMap,
+	catchError,
+	retry,
+} from "rxjs/operators"
 import { useSession } from "../context"
 import withStyles from "react-jss"
 import downloadIcon from "../resources/images/download.svg"
@@ -34,7 +40,7 @@ export default withStyles(styles)(({ downloadIds, className, classes }) => {
 				withLatestFrom(doc$),
 				mergeMap(([id, docHandle]) => docHandle.ask("GetObject", id)),
 				mergeMap(objHandle =>
-					objHandle.ask("ExportData", "CSV_C", "/qHyperCubeDef")
+					objHandle.ask("ExportData", "CSV_C", "/qHyperCubeDef").pipe(retry(3))
 				),
 				catchError(err => {
 					console.log(err)

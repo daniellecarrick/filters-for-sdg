@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useMemo, useEffect } from "react"
 import QdtComponents from "qdt-components"
 import uuidv4 from "uuid/v4"
-import { connectSession, qAskReplay, invalidations, qAsk } from "rxq"
+import { connectSession } from "rxq"
 import { from } from "rxjs"
-import { shareReplay, concatMap, tap, mergeMap, filter } from "rxjs/operators"
+import { shareReplay, mergeMap, filter, switchMap, retry } from "rxjs/operators"
+import { qAskReplayRetry } from "../operators"
 
 /** Convert the incoming qlik config to format supported by qdt */
 const qdtConfigGenerator = ({
@@ -53,7 +54,9 @@ export const SessionProvider = ({
 					identity: sessionId,
 				})
 				const rxqGlobal$ = rxqSession.global$.pipe(shareReplay(1))
-				const rxqDoc$ = rxqGlobal$.pipe(qAskReplay("OpenDoc", config.appname))
+				const rxqDoc$ = rxqGlobal$.pipe(
+					qAskReplayRetry("OpenDoc", config.appname)
+				)
 
 				/** return the QdtComponent session and RxQ session for this config */
 				return {
@@ -74,24 +77,11 @@ export const SessionProvider = ({
 				filter(session => session.initialBookmark !== undefined),
 				mergeMap(session =>
 					session.rxq.doc$.pipe(
-						qAskReplay("ApplyBookmark", session.initialBookmark)
+						qAskReplayRetry("ApplyBookmark", session.initialBookmark)
 					)
 				)
 			)
 			.subscribe()
-
-		// const sub$ = sessions[0].rxq.doc$
-		//   .pipe(
-		//     qAskReplay("CreateSessionObject", {
-		//       qInfo: { qType: "currentselections" },
-		//       currentSelections: {
-		//         qStringExpression: "=GetCurrentSelections()"
-		//       }
-		//     }),
-		//     invalidations(true),
-		//     qAskReplay("GetLayout")
-		//   )
-		//   .subscribe(console.log);
 
 		return () => bookmark$.unsubscribe()
 	}, [sessions])

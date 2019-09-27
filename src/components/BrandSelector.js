@@ -2,10 +2,18 @@ import React, { useState, useEffect, useRef } from "react"
 import { useSession } from "../context"
 import { qAskReplay, invalidations } from "rxq"
 import { Subject } from "rxjs"
-import { map, tap, withLatestFrom, switchMap, take } from "rxjs/operators"
+import {
+	map,
+	tap,
+	withLatestFrom,
+	switchMap,
+	take,
+	retry,
+} from "rxjs/operators"
 import withStyles from "react-jss"
 import classNames from "classnames"
 import * as brandImages from "../resources/images/brands"
+import { qAskReplayRetry } from "../operators"
 
 const styles = {
 	brandDropdown: {
@@ -40,7 +48,7 @@ export default withStyles(styles)(
 		const selectBrand$ = useRef(new Subject()).current
 		useEffect(() => {
 			const brandListObj$ = doc$.pipe(
-				qAskReplay("CreateSessionObject", {
+				qAskReplayRetry("CreateSessionObject", {
 					qInfo: { qType: "listobject" },
 					qListObjectDef: {
 						qDef: {
@@ -54,7 +62,7 @@ export default withStyles(styles)(
 			const brandLayout$ = brandListObj$
 				.pipe(
 					invalidations(true),
-					qAskReplay("GetLayout"),
+					qAskReplayRetry("GetLayout"),
 					map(layout => layout.qListObject.qDataPages[0].qMatrix),
 					map(qMatrix =>
 						qMatrix.map(row => ({
@@ -99,9 +107,11 @@ export default withStyles(styles)(
 			return () => {
 				brandListObj$
 					.pipe(
-						qAskReplay("GetProperties"),
+						qAskReplayRetry("GetProperties"),
 						map(props => props.qInfo.qId),
-						switchMap(id => doc$.pipe(qAskReplay("DestroySessionObject", id))),
+						switchMap(id =>
+							doc$.pipe(qAskReplayRetry("DestroySessionObject", id))
+						),
 						take(1)
 					)
 					.subscribe()

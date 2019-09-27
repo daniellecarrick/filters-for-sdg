@@ -16,7 +16,7 @@ export default ({ app } = {}) => {
 			.pipe(
 				combineLatest(doc$),
 				switchMap(([bookmarkId, docHandle]) =>
-					docHandle.ask("ApplyBookmark", bookmarkId)
+					docHandle.ask("ApplyBookmark", bookmarkId).pipe(retry(3))
 				)
 			)
 			.subscribe()

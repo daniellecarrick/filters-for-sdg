@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSession } from "dash-component-library/context"
-import { qAskReplay, invalidations } from "rxq"
+import { invalidations } from "rxq"
 import { map, switchMap, take, retry } from "rxjs/operators"
+import { qAskReplayRetry } from "../operators"
 
 export default () => {
 	const {
@@ -12,7 +13,7 @@ export default () => {
 
 	useEffect(() => {
 		const currentSelectionsObj$ = doc$.pipe(
-			qAskReplay("CreateSessionObject", {
+			qAskReplayRetry("CreateSessionObject", {
 				qInfo: { qType: "currentselections" },
 				currentSelections: { qStringExpression: "=GetCurrentSelections(', ')" },
 			})
@@ -29,9 +30,11 @@ export default () => {
 		return () => {
 			currentSelectionsObj$
 				.pipe(
-					qAskReplay("GetProperties"),
+					qAskReplayRetry("GetProperties"),
 					map(props => props.qInfo.qId),
-					switchMap(id => doc$.pipe(qAskReplay("DestroySessionObject", id))),
+					switchMap(id =>
+						doc$.pipe(qAskReplayRetry("DestroySessionObject", id))
+					),
 					take(1)
 				)
 				.subscribe()

@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react"
 import { useSession } from "dash-component-library/context"
-import { qAskReplay } from "rxq"
-import { combineLatest, map, switchMap } from "rxjs/operators"
+import { combineLatest, map, switchMap, retry } from "rxjs/operators"
 import { Subject } from "rxjs"
+import { qAskReplayRetry } from "../operators"
 
 export default ({ field, app }) => {
 	const sessions = useSession()
@@ -13,7 +13,7 @@ export default ({ field, app }) => {
 	const select$ = useRef(new Subject()).current
 
 	useEffect(() => {
-		const field$ = doc$.pipe(qAskReplay("GetField", field))
+		const field$ = doc$.pipe(qAskReplayRetry("GetField", field))
 
 		const sub$ = select$
 			.pipe(
@@ -28,7 +28,7 @@ export default ({ field, app }) => {
 				}),
 				combineLatest(field$),
 				switchMap(([selections, fieldHandle]) =>
-					fieldHandle.ask("SelectValues", selections, false)
+					fieldHandle.ask("SelectValues", selections, false).pipe(retry(3))
 				)
 			)
 			.subscribe()

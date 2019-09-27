@@ -1,8 +1,16 @@
 import { useRef, useEffect, useState } from "react"
 import { Subject } from "rxjs"
 import { useSession } from "dash-component-library/context"
-import { qAskReplay, invalidations } from "rxq"
-import { map, take, filter, switchMap, combineLatest } from "rxjs/operators"
+import { invalidations } from "rxq"
+import {
+	map,
+	take,
+	filter,
+	switchMap,
+	combineLatest,
+	retry,
+} from "rxjs/operators"
+import { qAskReplayRetry } from "../operators"
 
 export default ({ field }) => {
 	const {
@@ -17,7 +25,7 @@ export default ({ field }) => {
 
 	useEffect(() => {
 		const listObj$ = doc$.pipe(
-			qAskReplay("CreateSessionObject", {
+			qAskReplayRetry("CreateSessionObject", {
 				qInfo: { qType: "listobject" },
 				qListObjectDef: {
 					qDef: { qFieldDefs: [field] },
@@ -29,7 +37,7 @@ export default ({ field }) => {
 		const setButtons$ = listObj$
 			.pipe(
 				invalidations(true),
-				qAskReplay("GetLayout"),
+				qAskReplayRetry("GetLayout"),
 				map(layout =>
 					layout.qListObject.qDataPages[0].qMatrix.map(row => ({
 						label: row[0].qText,
@@ -43,7 +51,7 @@ export default ({ field }) => {
 		const setSelectedLabel$ = listObj$
 			.pipe(
 				invalidations(true),
-				qAskReplay("GetLayout"),
+				qAskReplayRetry("GetLayout"),
 				map(layout =>
 					layout.qListObject.qDataPages[0].qMatrix
 						.filter(row => row[0].qState === "S")
@@ -58,12 +66,14 @@ export default ({ field }) => {
 				filter(dimElemNo => dimElemNo !== null),
 				combineLatest(listObj$),
 				switchMap(([dimElemNo, obj$]) =>
-					obj$.ask(
-						"SelectListObjectValues",
-						"/qListObjectDef",
-						[dimElemNo],
-						false
-					)
+					obj$
+						.ask(
+							"SelectListObjectValues",
+							"/qListObjectDef",
+							[dimElemNo],
+							false
+						)
+						.pipe(retry(3))
 				)
 			)
 			.subscribe()
@@ -71,9 +81,11 @@ export default ({ field }) => {
 		return () => {
 			listObj$
 				.pipe(
-					qAskReplay("GetProperties"),
+					qAskReplayRetry("GetProperties"),
 					map(props => props.qInfo.qId),
-					switchMap(id => doc$.pipe(qAskReplay("DestroySessionObject", id))),
+					switchMap(id =>
+						doc$.pipe(qAskReplayRetry("DestroySessionObject", id))
+					),
 					take(1)
 				)
 				.subscribe()

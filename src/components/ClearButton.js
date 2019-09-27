@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react"
 import { Button } from "."
 import { useSession } from "../context"
 import { Subject } from "rxjs"
-import { withLatestFrom, pluck } from "rxjs/operators"
-import { qAskReplay } from "rxq"
+import { withLatestFrom, pluck, retry, switchMap } from "rxjs/operators"
 import withStyles from "react-jss"
 import classNames from "classnames"
 import refresh from "../resources/images/refresh.png"
+import { qAskReplayRetry } from "../operators"
 
 const styles = {
 	clearButton: { "&:hover": { backgroundColor: "#fff" } },
@@ -25,7 +25,7 @@ export default withStyles(styles)(
 				.pipe(
 					withLatestFrom(doc$),
 					pluck(1),
-					qAskReplay("ClearAll")
+					qAskReplayRetry("ClearAll")
 				)
 				.subscribe(() => onClear())
 
