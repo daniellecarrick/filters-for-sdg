@@ -63,6 +63,7 @@ export const SessionProvider = ({
           name: config.name,
           app: config.appname,
           initialBookmark: config.initialBookmark,
+          initialSelections: config.initialSelections,
           sessionId,
           qdtComponents,
           rxq: { session: rxqSession, global$: rxqGlobal$, doc$: rxqDoc$ }
@@ -72,12 +73,24 @@ export const SessionProvider = ({
   );
 
   useEffect(() => {
-    const bookmark$ = from(sessions)
+    const selections$ = from(sessions)
       .pipe(
-        filter(session => session.initialBookmark !== undefined),
+        filter(
+          session =>
+            session.initialSelections !== undefined &&
+            session.initialSelections.length > 0
+        ),
         mergeMap(session =>
-          session.rxq.doc$.pipe(
-            qAskReplay("ApplyBookmark", session.initialBookmark)
+          from(session.initialSelections).pipe(
+            concatMap(fieldSelection =>
+              session.rxq.doc$.pipe(
+                qAskReplay("GetField", fieldSelection.field),
+                qAskReplay(
+                  "SelectValues",
+                  fieldSelection.values.map(value => ({ qText: value }))
+                )
+              )
+            )
           )
         )
       )
@@ -95,6 +108,21 @@ export const SessionProvider = ({
     //     qAskReplay("GetLayout")
     //   )
     //   .subscribe(console.log);
+
+    return () => selections$.unsubscribe();
+  }, [sessions]);
+
+  useEffect(() => {
+    const bookmark$ = from(sessions)
+      .pipe(
+        filter(session => session.initialBookmark !== undefined),
+        mergeMap(session =>
+          session.rxq.doc$.pipe(
+            qAskReplay("ApplyBookmark", session.initialBookmark)
+          )
+        )
+      )
+      .subscribe();
 
     return () => bookmark$.unsubscribe();
   }, [sessions]);
