@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useMemo, useEffect } from "react";
 import QdtComponents from "qdt-components";
 import uuidv4 from "uuid/v4";
-import { connectSession, qAskReplay, invalidations, qAsk } from "rxq";
-import { from } from "rxjs";
-import { shareReplay, concatMap, tap, mergeMap, filter } from "rxjs/operators";
+import { connectSession, qAskReplay} from "rxq";
+import { of, forkJoin } from "rxjs";
+import {
+  shareReplay,
+  switchMap,
+  mapTo
+} from "rxjs/operators";
 
 /** Convert the incoming qlik config to format supported by qdt */
 const qdtConfigGenerator = ({
@@ -55,9 +59,28 @@ export const SessionProvider = ({
         const rxqGlobal$ = rxqSession.global$.pipe(shareReplay(1));
         const rxqDoc$ = rxqGlobal$.pipe(
           qAskReplay("OpenDoc", config.appname),
+          switchMap(h => {
+            if (
+              config.initialSelections !== undefined &&
+              config.initialSelections.length > 0
+            ) {
+              let selections = config.initialSelections.map(fieldSelection => {
+                return h.ask("GetField", fieldSelection.field).pipe(
+                  qAskReplay("SelectValues", fieldSelection.values)
+                );
+              });
+              return forkJoin(...selections).pipe(mapTo(h));
+            } else if (config.initialBookmark) {
+              let bookmark$ = h.ask("ApplyBookmark", config.initialBookmark);
+              return bookmark$.pipe(mapTo(h));
+            }
+            return of(h);
+          }),
           shareReplay(1)
         );
 
+        // make sure the rxq stuff runs at least once
+        rxqDoc$.subscribe();
         /** return the QdtComponent session and RxQ session for this config */
         return {
           name: config.name,
@@ -72,60 +95,32 @@ export const SessionProvider = ({
     [_serializedConfig]
   );
 
-  useEffect(() => {
-    const selections$ = from(sessions)
-      .pipe(
-        filter(
-          session =>
-            session.initialSelections !== undefined &&
-            session.initialSelections.length > 0
-        ),
-        mergeMap(session =>
-          from(session.initialSelections).pipe(
-            concatMap(fieldSelection =>
-              session.rxq.doc$.pipe(
-                qAskReplay("GetField", fieldSelection.field),
-                qAskReplay(
-                  "SelectValues",
-                  fieldSelection.values.map(value => ({ qText: value }))
-                )
-              )
-            )
-          )
-        )
-      )
-      .subscribe();
+  // useEffect(() => {
+  //   const selections$ = from(sessions)
+  //     .pipe(
+  //       filter(
+  //         session =>
+  //           session.initialSelections !== undefined &&
+  //           session.initialSelections.length > 0
+  //       ),
+  //       mergeMap(session =>
+  //         from(session.initialSelections).pipe(
+  //           concatMap(fieldSelection =>
+  //             session.rxq.doc$.pipe(
+  //               qAskReplay("GetField", fieldSelection.field),
+  //               qAskReplay(
+  //                 "SelectValues",
+  //                 fieldSelection.values
+  //               )
+  //             )
+  //           )
+  //         )
+  //       )
+  //     )
+  //     .subscribe();
 
-    // const sub$ = sessions[0].rxq.doc$
-    //   .pipe(
-    //     qAskReplay("CreateSessionObject", {
-    //       qInfo: { qType: "currentselections" },
-    //       currentSelections: {
-    //         qStringExpression: "=GetCurrentSelections()"
-    //       }
-    //     }),
-    //     invalidations(true),
-    //     qAskReplay("GetLayout")
-    //   )
-    //   .subscribe(console.log);
-
-    return () => selections$.unsubscribe();
-  }, [sessions]);
-
-  useEffect(() => {
-    const bookmark$ = from(sessions)
-      .pipe(
-        filter(session => session.initialBookmark !== undefined),
-        mergeMap(session =>
-          session.rxq.doc$.pipe(
-            qAskReplay("ApplyBookmark", session.initialBookmark)
-          )
-        )
-      )
-      .subscribe();
-
-    return () => bookmark$.unsubscribe();
-  }, [sessions]);
+  //   return () => selections$.unsubscribe();
+  // }, [sessions]);
 
   /** Return Context Provider */
   return (
