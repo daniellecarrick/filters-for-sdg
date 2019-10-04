@@ -1,10 +1,9 @@
 import React, { createContext, useContext, useMemo, useEffect } from "react"
 import QdtComponents from "qdt-components"
 import uuidv4 from "uuid/v4"
-import { connectSession } from "rxq"
-import { from } from "rxjs"
-import { shareReplay, mergeMap, filter, switchMap, retry } from "rxjs/operators"
-import { qAskReplayRetry } from "../operators"
+import { connectSession, qAskReplay } from "rxq"
+import { of, forkJoin } from "rxjs"
+import { shareReplay, switchMap, mapTo } from "rxjs/operators"
 
 /** Convert the incoming qlik config to format supported by qdt */
 const qdtConfigGenerator = ({
@@ -55,14 +54,35 @@ export const SessionProvider = ({
 				})
 				const rxqGlobal$ = rxqSession.global$.pipe(shareReplay(1))
 				const rxqDoc$ = rxqGlobal$.pipe(
-					qAskReplayRetry("OpenDoc", config.appname)
+					qAskReplay("OpenDoc", config.appname),
+					switchMap(h => {
+						if (
+							config.initialSelections !== undefined &&
+							config.initialSelections.length > 0
+						) {
+							let selections = config.initialSelections.map(fieldSelection => {
+								return h
+									.ask("GetField", fieldSelection.field)
+									.pipe(qAskReplay("SelectValues", fieldSelection.values))
+							})
+							return forkJoin(...selections).pipe(mapTo(h))
+						} else if (config.initialBookmark) {
+							let bookmark$ = h.ask("ApplyBookmark", config.initialBookmark)
+							return bookmark$.pipe(mapTo(h))
+						}
+						return of(h)
+					}),
+					shareReplay(1)
 				)
 
+				// make sure the rxq stuff runs at least once
+				rxqDoc$.subscribe()
 				/** return the QdtComponent session and RxQ session for this config */
 				return {
 					name: config.name,
 					app: config.appname,
 					initialBookmark: config.initialBookmark,
+					initialSelections: config.initialSelections,
 					sessionId,
 					qdtComponents,
 					rxq: { session: rxqSession, global$: rxqGlobal$, doc$: rxqDoc$ },
@@ -71,20 +91,32 @@ export const SessionProvider = ({
 		[_serializedConfig]
 	)
 
-	useEffect(() => {
-		const bookmark$ = from(sessions)
-			.pipe(
-				filter(session => session.initialBookmark !== undefined),
-				mergeMap(session =>
-					session.rxq.doc$.pipe(
-						qAskReplayRetry("ApplyBookmark", session.initialBookmark)
-					)
-				)
-			)
-			.subscribe()
+	// useEffect(() => {
+	//   const selections$ = from(sessions)
+	//     .pipe(
+	//       filter(
+	//         session =>
+	//           session.initialSelections !== undefined &&
+	//           session.initialSelections.length > 0
+	//       ),
+	//       mergeMap(session =>
+	//         from(session.initialSelections).pipe(
+	//           concatMap(fieldSelection =>
+	//             session.rxq.doc$.pipe(
+	//               qAskReplay("GetField", fieldSelection.field),
+	//               qAskReplay(
+	//                 "SelectValues",
+	//                 fieldSelection.values
+	//               )
+	//             )
+	//           )
+	//         )
+	//       )
+	//     )
+	//     .subscribe();
 
-		return () => bookmark$.unsubscribe()
-	}, [sessions])
+	//   return () => selections$.unsubscribe();
+	// }, [sessions]);
 
 	/** Return Context Provider */
 	return (
