@@ -53,11 +53,11 @@ export default withStyles(styles)(
         { code: "AD" },
         { code: "ARST" },
         { code: "BA" },
-        { code: "BRDE" },
+        // { code: "BRDE" },
         { code: "CNT" },
         { code: "EPIC" },
         { code: "GLAM" },
-        { code: "GFDG" },
+        // { code: "GFDG" },
         { code: "GQ" },
         { code: "PTFK" },
         { code: "SELF" },
@@ -65,7 +65,7 @@ export default withStyles(styles)(
         { code: "TNY" },
         { code: "VF" },
         { code: "VOG" },
-        { code: "W" },
+        // { code: "W" },
         { code: "WIRE" }
       ];
 
@@ -109,12 +109,17 @@ export default withStyles(styles)(
               .filter(brand => brand.code !== undefined);
           }),
           tap(brandList => {
-            const selectedBrand = brandList.find(
+            const selectedBrand = brandList.filter(
               brand => brand.selectionState === "S"
             );
-            if (selectedBrand !== undefined)
-              setSelectedBrand(selectedBrand.code);
-            else setSelectedBrand(null);
+            if (selectedBrand.length > 0) {
+              const selected = selectedBrand
+                .map(brand => brand.code)
+                .join(", ");
+              setSelectedBrand(selected);
+            } else {
+              setSelectedBrand(null);
+            }
           })
         )
         .subscribe(setBrandList);
@@ -153,7 +158,7 @@ export default withStyles(styles)(
       <div className={classNames(classes.brandDropdown__container, className)}>
         {brandList.map((brand, i) => (
           <input
-            type="button"
+            type='button'
             key={i}
             className={classNames(classes.brandDropdown__input, {
               [classes.brandDropdown__input_selected]:
@@ -163,7 +168,9 @@ export default withStyles(styles)(
               backgroundImage: `url(${brandImages[brand.code]})`
             }}
             onClick={() => {
-              brand.elemNumber ? selectBrand$.next(brand.elemNumber) : null;
+              brand.elemNumber >= 0
+                ? selectBrand$.next(brand.elemNumber)
+                : null;
             }}
           />
         ))}
