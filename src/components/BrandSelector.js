@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSession } from "../context";
-import { qAskReplay, invalidations } from "rxq";
+import { invalidations } from "rxq";
 import { Subject } from "rxjs";
 import {
   map,
@@ -8,7 +8,7 @@ import {
   withLatestFrom,
   switchMap,
   take,
-  retry
+  switchMapTo
 } from "rxjs/operators";
 import withStyles from "react-jss";
 import classNames from "classnames";
@@ -38,7 +38,14 @@ const styles = {
 };
 
 export default withStyles(styles)(
-  ({ field, setSelectedBrand = () => {}, fieldMap, className, classes }) => {
+  ({
+    field,
+    setSelectedBrand = () => {},
+    fieldMap,
+    className,
+    classes,
+    singleSelect = false
+  }) => {
     const {
       rxq: { doc$ }
     } = useSession()[0];
@@ -127,14 +134,20 @@ export default withStyles(styles)(
       const selectionSub$ = selectBrand$
         .pipe(
           withLatestFrom(brandListObj$),
-          switchMap(([brand, brandListObjHandle]) =>
-            brandListObjHandle.ask(
+          switchMap(([brand, brandListObjHandle]) => {
+            const select = brandListObjHandle.ask(
               "SelectListObjectValues",
               "/qListObjectDef",
               [brand],
               true
-            )
-          )
+            );
+            if (singleSelect) {
+              return brandListObjHandle
+                .ask("ClearSelections", "/qListObjectDef")
+                .pipe(switchMapTo(select));
+            }
+            return select;
+          })
         )
         .subscribe();
 
