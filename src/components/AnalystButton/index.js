@@ -1,7 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 import withStyles from "react-jss"
-import arrow from "../resources/images/right-arrow.png"
+import arrow from "../../resources/images/right-arrow.png"
 
 const styles = {
 	analystLink: {
