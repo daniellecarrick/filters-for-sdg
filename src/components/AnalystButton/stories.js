@@ -1,6 +1,6 @@
-import React from "react"
-import AnalystButton from "."
+import React from "react";
+import AnalystButton from ".";
 
-export default { title: "Analyst Button" }
+export default { title: "Analyst Button" };
 
-export const basic = () => <AnalystButton url="https://www.condenast.com/" />
+export const basic = () => <AnalystButton url="https://www.condenast.com/" />;
