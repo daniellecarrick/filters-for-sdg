@@ -1,6 +1,6 @@
 import React from "react";
 import withStyles from "react-jss";
-import { useCurrentSelections } from "../hooks";
+import { useCurrentSelections } from "../../hooks";
 
 const styles = {};
 export default withStyles(styles)(({ className, classes }) => {

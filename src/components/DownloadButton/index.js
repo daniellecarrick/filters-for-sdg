@@ -7,9 +7,9 @@ import {
   catchError,
   retry,
 } from "rxjs/operators";
-import { useSession } from "../context";
+import { useSession } from "../../context";
 import withStyles from "react-jss";
-import downloadIcon from "../resources/images/download.svg";
+import downloadIcon from "../../resources/images/download.svg";
 import classNames from "classnames";
 
 const styles = {
