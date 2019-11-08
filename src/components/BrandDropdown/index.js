@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react"
-import { useSession } from "../context"
+import { useSession } from "../../context"
 import { qAskReplay, invalidations } from "rxq"
 import { Subject } from "rxjs"
 import { map, tap, withLatestFrom, switchMap } from "rxjs/operators"
 import withStyles from "react-jss"
 import classNames from "classnames"
-import { Dropdown } from "."
-import * as brandImages from "../resources/images/brands"
+import { Dropdown } from "../"
+import * as brandImages from "../../resources/images/brands"
 
 const styles = {
 	brandDropdown: {
