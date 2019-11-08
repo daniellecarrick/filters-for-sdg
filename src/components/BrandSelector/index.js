@@ -13,7 +13,7 @@ import {
 import withStyles from "react-jss";
 import classNames from "classnames";
 import * as brandImages from "../../resources/images/brands";
-import { qAskReplayRetry } from "../operators";
+import { qAskReplayRetry } from "../../operators";
 
 const styles = {
   brandDropdown: {
