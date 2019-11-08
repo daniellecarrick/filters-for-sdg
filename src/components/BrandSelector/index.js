@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSession } from "../context";
+import { useSession } from "../../context";
 import { invalidations } from "rxq";
 import { Subject } from "rxjs";
 import {
@@ -8,19 +8,19 @@ import {
   withLatestFrom,
   switchMap,
   take,
-  switchMapTo
+  switchMapTo,
 } from "rxjs/operators";
 import withStyles from "react-jss";
 import classNames from "classnames";
-import * as brandImages from "../resources/images/brands";
+import * as brandImages from "../../resources/images/brands";
 import { qAskReplayRetry } from "../operators";
 
 const styles = {
   brandDropdown: {
-    marginRight: "10px"
+    marginRight: "10px",
   },
   brandDropdown__container: {
-    width: "300px"
+    width: "300px",
   },
   brandDropdown__input: {
     width: "90px",
@@ -32,9 +32,9 @@ const styles = {
     border: "none",
     opacity: 0.3,
     cursor: "pointer",
-    "&:hover": { opacity: 1 }
+    "&:hover": { opacity: 1 },
   },
-  brandDropdown__input_selected: { opacity: 1 }
+  brandDropdown__input_selected: { opacity: 1 },
 };
 
 export default withStyles(styles)(
@@ -44,10 +44,10 @@ export default withStyles(styles)(
     fieldMap,
     className,
     classes,
-    singleSelect = false
+    singleSelect = false,
   }) => {
     const {
-      rxq: { doc$ }
+      rxq: { doc$ },
     } = useSession()[0];
 
     /** Get brand list */
@@ -73,7 +73,7 @@ export default withStyles(styles)(
         { code: "VF" },
         { code: "VOG" },
         // { code: "W" },
-        { code: "WIRE" }
+        { code: "WIRE" },
       ];
 
       const brandListObj$ = doc$.pipe(
@@ -81,10 +81,10 @@ export default withStyles(styles)(
           qInfo: { qType: "listobject" },
           qListObjectDef: {
             qDef: {
-              qFieldDefs: [field]
+              qFieldDefs: [field],
             },
-            qInitialDataFetch: [{ qWidth: 1, qHeight: 100 }]
-          }
+            qInitialDataFetch: [{ qWidth: 1, qHeight: 100 }],
+          },
         })
       );
 
@@ -97,7 +97,7 @@ export default withStyles(styles)(
             qMatrix.map(row => ({
               code: row[0].qText,
               elemNumber: row[0].qElemNumber,
-              selectionState: row[0].qState
+              selectionState: row[0].qState,
             }))
           ),
           map(brandList => {
@@ -105,7 +105,7 @@ export default withStyles(styles)(
               if (fieldMap) {
                 return {
                   ...brand,
-                  code: fieldMap[brand.code]
+                  code: fieldMap[brand.code],
                 };
               } else return brand;
             });
@@ -171,14 +171,14 @@ export default withStyles(styles)(
       <div className={classNames(classes.brandDropdown__container, className)}>
         {brandList.map((brand, i) => (
           <input
-            type='button'
+            type="button"
             key={i}
             className={classNames(classes.brandDropdown__input, {
               [classes.brandDropdown__input_selected]:
-                brand.selectionState === "S"
+                brand.selectionState === "S",
             })}
             style={{
-              backgroundImage: `url(${brandImages[brand.code]})`
+              backgroundImage: `url(${brandImages[brand.code]})`,
             }}
             onClick={() => {
               brand.elemNumber >= 0
