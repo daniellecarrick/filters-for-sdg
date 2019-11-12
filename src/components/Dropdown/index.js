@@ -3,13 +3,14 @@ import withStyles from "react-jss";
 import { Button } from "../";
 import classNames from "classnames";
 import { BehaviorSubject, fromEvent } from "rxjs";
-import { map, withLatestFrom, filter, tap } from "rxjs/operators";
+import { map, withLatestFrom, filter } from "rxjs/operators";
 
 const styles = {
   dropdown: {
     position: "relative",
     height: "100%",
   },
+  dropdownButton: { "&:hover": { backgroundColor: "#212121" } },
   dropdownContainer: {
     position: "absolute",
     padding: "20px",
@@ -23,8 +24,10 @@ const styles = {
 
 export default withStyles(styles)(
   ({
-    DropdownButton = ({ onClick, children = "Dropdown" }) => (
-      <Button onClick={onClick}>{children}</Button>
+    DropdownButton = ({ onClick, children = "Dropdown", classes }) => (
+      <Button className={classes.dropdownButton} onClick={onClick}>
+        {children}
+      </Button>
     ),
     dropdownButtonChildren,
     className,
@@ -51,7 +54,10 @@ export default withStyles(styles)(
 
     return (
       <div className={classNames(classes.dropdown, className)}>
-        <DropdownButton onClick={() => setShowDropdown(!showDropdown)}>
+        <DropdownButton
+          classes={classes}
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
           {dropdownButtonChildren}
         </DropdownButton>
         <div
