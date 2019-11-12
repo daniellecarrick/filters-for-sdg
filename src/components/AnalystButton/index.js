@@ -8,6 +8,7 @@ const styles = {
     display: "flex",
     paddingRight: 0,
     border: "none",
+    fontFamily: "Rubik",
     fontSize: "10px",
     fontWeight: 500,
     color: "#4a4a4a",
