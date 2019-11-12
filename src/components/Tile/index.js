@@ -16,6 +16,7 @@ const styles = {
     position: "relative",
     padding: "16px",
     backgroundColor: "#fff",
+    fontFamily: "Rubik !important",
   },
   tileTitle: {
     marginBottom: "30px",
@@ -24,40 +25,55 @@ const styles = {
     fontWeight: "bold",
     color: "#000",
   },
+  tile__downloadButton: {
+    position: "absolute",
+    top: "16px",
+    right: "16px",
+  },
 };
 
 export default withStyles(styles)(
   ({ title, anchor, downloadIds = [], className, classes, children }) => {
-    const {
-      rxq: { doc$ },
-    } = useSession()[0];
+    let doc$, download$;
+    if (downloadIds.length) {
+      const { rxq } = useSession()[0];
+      doc$ = rxq.doc$;
 
-    const download$ = useRef(new Subject()).current;
+      download$ = useRef(new Subject()).current;
+    }
 
     useEffect(() => {
-      const sub$ = download$
-        .pipe(
-          switchMap(id => from(id)),
-          withLatestFrom(doc$),
-          mergeMap(([id, docHandle]) => docHandle.ask("GetObject", id)),
-          mergeMap(objHandle =>
-            objHandle.ask("ExportData", "CSV_C", "/qHyperCubeDef")
-          ),
-          catchError(err => {
-            console.log(err);
-          })
-        )
-        .subscribe(({ qUrl }) => {
-          window.open(`https://dash.condenast.com${qUrl}`);
-        });
+      let sub$;
+      if (downloadIds.length) {
+        sub$ = download$
+          .pipe(
+            switchMap(id => from(id)),
+            withLatestFrom(doc$),
+            mergeMap(([id, docHandle]) => docHandle.ask("GetObject", id)),
+            mergeMap(objHandle =>
+              objHandle.ask("ExportData", "CSV_C", "/qHyperCubeDef")
+            ),
+            catchError(err => {
+              console.log(err);
+            })
+          )
+          .subscribe(({ qUrl }) => {
+            window.open(`https://dash.condenast.com${qUrl}`);
+          });
+      }
 
-      return () => sub$.unsubscribe();
+      return () => {
+        if (sub$) sub$.unsubscribe();
+      };
     }, []);
 
     return (
       <div id={anchor} className={classNames("tile", classes.tile, className)}>
         {downloadIds.length > 0 ? (
-          <DownloadButton downloadIds={downloadIds} />
+          <DownloadButton
+            className={classes.tile__downloadButton}
+            downloadIds={downloadIds}
+          />
         ) : null}
         {title ? (
           <div className={classNames("title", classes.tileTitle)}>{title}</div>
