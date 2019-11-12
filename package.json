@@ -1,6 +1,6 @@
 {
   "name": "dash-component-library",
-  "version": "0.3.1-beta.0",
+  "version": "0.3.0-beta.4",
   "description": "Component Library for Dash",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build:dist": "npm run copy-package && npm run build:cjs && npm run bundle-dist",
     "storybook": "NODE_ENV=development start-storybook -p 3000",
     "update-beta-patch": "npm version prepatch --preid beta",
-    "publish-beta": "npm run update-beta-patch && npm run build:dist && cd dist && npm run publish --tag beta"
+    "publish-beta": "npm run update-beta-patch && npm run build:dist && cd dist && npm publish --tag beta"
   },
   "keywords": [],
   "author": "Conde Nast Data Visualization",
