@@ -1,5 +1,4 @@
-export { default as useButtonGroupQlik } from "./useButtonGroupQlik"
-export { default as useCurrentSelections } from "./useCurrentSelections"
-export { default as useFieldSelectValues } from "./useFieldSelectValues"
-export { default as useSelectFieldValues } from "./useSelectFieldValues"
-export { default as useSetBookmark } from "./useSetBookmark"
+export { default as useButtonGroupQlik } from "./useButtonGroupQlik";
+export { default as useCurrentSelections } from "./useCurrentSelections";
+export { default as useSelectFieldValues } from "./useSelectFieldValues";
+export { default as useSetBookmark } from "./useSetBookmark";
