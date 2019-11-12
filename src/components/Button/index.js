@@ -9,7 +9,7 @@ const styles = {
     justifyContent: "center",
     padding: "6px 10px",
     // height: "26px",
-    fontFamily: "Rubik",
+    fontFamily: "Rubik !important",
     fontSize: "12px",
     fontWeight: 500,
     lineHeight: "14px",
