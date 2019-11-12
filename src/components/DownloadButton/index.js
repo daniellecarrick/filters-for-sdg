@@ -14,9 +14,6 @@ import classNames from "classnames";
 
 const styles = {
   downloadButton: {
-    position: "absolute",
-    top: "16px",
-    right: "16px",
     width: "24px",
     height: "24px",
     backgroundImage: `url(${downloadIcon})`,
