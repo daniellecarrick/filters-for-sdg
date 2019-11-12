@@ -5,7 +5,8 @@ import { Subject } from "rxjs";
 import { map, tap, withLatestFrom, switchMap } from "rxjs/operators";
 import withStyles from "react-jss";
 import classNames from "classnames";
-import { Dropdown, BrandSelector } from "../";
+import { Dropdown, BrandSelector, Button } from "../";
+import dropdown from "../../resources/images/dropdown.png";
 import * as brandImages from "../../resources/images/brands";
 
 const styles = {
@@ -33,24 +34,40 @@ const styles = {
     "&:hover": { opacity: 1 },
   },
   brandDropdown__input_selected: { opacity: 1 },
+  brandDropdown__dropdown_icon: { marginLeft: "6px", width: "10px" },
 };
 
-export default withStyles(styles)(({ field, fieldMap, className, classes }) => {
-  /** Get brand list */
-  const [selectedBrand, setSelectedBrand] = useState(null);
+const DropdownButton = withStyles(styles)(
+  ({ classes, children, ...dropdownButtonProps }) => {
+    return (
+      <Button className={classes.dropdownButton} {...dropdownButtonProps}>
+        {children}
+        <img className={classes.brandDropdown__dropdown_icon} src={dropdown} />
+      </Button>
+    );
+  }
+);
 
-  return (
-    <Dropdown
-      dropdownButtonChildren={`Brand${
-        selectedBrand !== null ? `: ${selectedBrand}` : ""
-      }`}
-      className={classNames(classes.brandDropdown, className)}
-    >
-      <BrandSelector
-        field={field}
-        setSelectedBrand={setSelectedBrand}
-        fieldMap={fieldMap}
-      />
-    </Dropdown>
-  );
-});
+export default withStyles(styles)(
+  ({ field, singleSelect = false, fieldMap, className, classes }) => {
+    /** Get brand list */
+    const [selectedBrand, setSelectedBrand] = useState(null);
+
+    return (
+      <Dropdown
+        DropdownButton={DropdownButton}
+        dropdownButtonChildren={`Brand${
+          selectedBrand !== null ? `: ${selectedBrand}` : ""
+        }`}
+        className={classNames(classes.brandDropdown, className)}
+      >
+        <BrandSelector
+          field={field}
+          singleSelect={singleSelect}
+          setSelectedBrand={setSelectedBrand}
+          fieldMap={fieldMap}
+        />
+      </Dropdown>
+    );
+  }
+);
