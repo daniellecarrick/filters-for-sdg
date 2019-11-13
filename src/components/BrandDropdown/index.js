@@ -5,30 +5,7 @@ import { Dropdown, BrandSelector, Button } from "../";
 import dropdown from "../../resources/images/dropdown.png";
 
 const styles = {
-  brandDropdown: {
-    marginRight: "10px",
-  },
-  brandDropdown__container: {
-    position: "absolute",
-    padding: "20px 20px 30px",
-    width: "300px",
-    textAlign: "center",
-    backgroundColor: "#343a40",
-    zIndex: 10,
-  },
-  brandDropdown__input: {
-    width: "90px",
-    height: "50px",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "140%",
-    backgroundPosition: "center",
-    backgroundColor: "transparent",
-    border: "none",
-    opacity: 0.3,
-    cursor: "pointer",
-    "&:hover": { opacity: 1 },
-  },
-  brandDropdown__input_selected: { opacity: 1 },
+  brandDropdown: { marginRight: "10px" },
   brandDropdown__dropdown_icon: { marginLeft: "6px", width: "10px" },
 };
 

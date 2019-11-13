@@ -6,11 +6,7 @@ import { BehaviorSubject, fromEvent } from "rxjs";
 import { map, withLatestFrom, filter } from "rxjs/operators";
 
 const styles = {
-  dropdown: {
-    position: "relative",
-    height: "100%",
-  },
-  dropdownButton: { "&:hover": { backgroundColor: "#212121" } },
+  dropdown: { position: "relative", height: "100%" },
   dropdownContainer: {
     position: "absolute",
     padding: "20px",
@@ -25,9 +21,7 @@ const styles = {
 export default withStyles(styles)(
   ({
     DropdownButton = ({ onClick, children = "Dropdown", classes }) => (
-      <Button className={classes.dropdownButton} onClick={onClick}>
-        {children}
-      </Button>
+      <Button onClick={onClick}>{children}</Button>
     ),
     dropdownButtonChildren,
     className,

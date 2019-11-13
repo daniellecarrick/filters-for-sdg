@@ -16,12 +16,8 @@ import * as brandImages from "../../resources/images/brands";
 import { qAskReplayRetry } from "../../operators";
 
 const styles = {
-  brandDropdown: {
-    marginRight: "10px",
-  },
-  brandDropdown__container: {
-    width: "300px",
-  },
+  brandDropdown: { marginRight: "10px" },
+  brandDropdown__container: { width: "300px" },
   brandDropdown__input: {
     width: "90px",
     height: "50px",
