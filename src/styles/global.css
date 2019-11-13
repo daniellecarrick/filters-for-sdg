@@ -1,0 +1,81 @@
+html {
+  background-color: #f2f2f2;
+}
+
+body {
+  margin: 0;
+  font-family: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: unset;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-Bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../resources/font/Rubik-BoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
