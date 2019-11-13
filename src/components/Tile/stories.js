@@ -10,6 +10,19 @@ export const basic = () => <Tile>content</Tile>;
 
 export const title = () => <Tile title="Tile">content</Tile>;
 
+export const footer = () => (
+  <Tile
+    title="Tile"
+    footer={
+      <a href="https://condenast.com" target="_blank">
+        Data Source
+      </a>
+    }
+  >
+    content
+  </Tile>
+);
+
 export const qlik = () => (
   <SessionProvider qlikConfig={adOpsConfig}>
     <Tile title="Tile" downloadIds={["jxkatw"]}>
