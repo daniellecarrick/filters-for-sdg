@@ -8,7 +8,6 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     padding: "6px 10px",
-    // height: "26px",
     fontFamily: "Rubik !important",
     fontSize: "12px",
     fontWeight: 500,
@@ -17,6 +16,7 @@ const styles = {
     borderRadius: "3px",
     cursor: "pointer",
     whiteSpace: "nowrap",
+    "&:hover": { backgroundColor: "#212121" },
   },
   button_dark: {
     backgroundColor: "#4a4a4a",
@@ -28,17 +28,11 @@ const styles = {
     color: "#4a4a4a",
   },
   button_lg: {
-    // height: "41px",
     padding: "10px 10px",
     fontSize: "18px",
     lineHeight: "21px",
     fontWeight: "bold",
   },
-  // button__iconContainer: {
-  //   position: "relative",
-  //   marginLeft: "10px",
-  //   marginRight: "-5px",
-  // },
 };
 
 export default withStyles(styles)(
@@ -60,16 +54,6 @@ export default withStyles(styles)(
         onClick={onClick}
       >
         {children}
-        {/* {Icon !== null ? (
-          <div
-            className={classNames(
-              "button__icon-container",
-              classes.button__iconContainer
-            )}
-          >
-            {Icon}
-          </div>
-        ) : null} */}
       </button>
     );
   }
