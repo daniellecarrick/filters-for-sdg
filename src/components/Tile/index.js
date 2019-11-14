@@ -31,8 +31,13 @@ const styles = {
     right: "16px",
   },
   tileFooter: {
-    marginTop: "10px",
-    fontStyle: "italic",
+    color: "#979797",
+    textAlign: "center",
+    paddingTop: "10px"
+  },
+  line: {
+    margin: "10px 0px",
+    border: "0.5px solid #e1e1e1"
   },
 };
 
@@ -91,7 +96,10 @@ export default withStyles(styles)(
           <div className={classNames("title", classes.tileTitle)}>{title}</div>
         ) : null}
         <div className="tile__content">{children}</div>
-        {footer ? <div className={classes.tileFooter}>{footer}</div> : null}
+        {footer ? <div className={classes.tileFooter}>
+        <hr className={classes.line} />
+          <div>{footer}</div>
+          </div> : null}
       </div>
     );
   }

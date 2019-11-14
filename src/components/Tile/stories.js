@@ -14,9 +14,7 @@ export const footer = () => (
   <Tile
     title="Tile"
     footer={
-      <a href="https://condenast.com" target="_blank">
-        Data Source
-      </a>
+        "Data Source"
     }
   >
     content
