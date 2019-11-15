@@ -37,8 +37,6 @@ export const SessionProvider = ({
     () =>
       /** For each qlik config.. */
       qlikConfigArray.map(config => {
-        console.log(config);
-        console.log(qdtConfigGenerator(config));
         /** Create a new session id */
         const sessionId = uuidv4();
 

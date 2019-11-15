@@ -1,9 +1,16 @@
-import { configure } from "@storybook/react"
-import "../src/styles/global.css"
+import { addParameters, configure } from "@storybook/react";
+import "../src/styles/global.css";
 
-function loadStories() {
-	const req = require.context("../src/components", true, /stories\.js$/)
-	return req.keys().map(file => req(file))
-}
+// addParameters({
+//   options: {
+//     storySort: (a, b) => a[1].id.localeCompare(b[1].id),
+//   },
+// });
 
-configure(loadStories, module)
+configure(
+  [
+    require.context("../src", true, /\.stories\.js$/),
+    require.context("../src", true, /\.stories\.mdx$/),
+  ],
+  module
+);
