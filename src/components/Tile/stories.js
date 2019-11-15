@@ -10,6 +10,17 @@ export const basic = () => <Tile>content</Tile>;
 
 export const title = () => <Tile title="Tile">content</Tile>;
 
+export const footer = () => (
+  <Tile
+    title="Tile"
+    footer={
+        "Data Source"
+    }
+  >
+    content
+  </Tile>
+);
+
 export const qlik = () => (
   <SessionProvider qlikConfig={adOpsConfig}>
     <Tile title="Tile" downloadIds={["jxkatw"]}>

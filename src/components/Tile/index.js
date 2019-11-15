@@ -30,10 +30,27 @@ const styles = {
     top: "16px",
     right: "16px",
   },
+  tileFooter: {
+    color: "#979797",
+    textAlign: "center",
+    paddingTop: "10px"
+  },
+  line: {
+    margin: "10px 0px",
+    border: "0.5px solid #e1e1e1"
+  },
 };
 
 export default withStyles(styles)(
-  ({ title, anchor, downloadIds = [], className, classes, children }) => {
+  ({
+    title,
+    footer,
+    anchor,
+    downloadIds = [],
+    className,
+    classes,
+    children,
+  }) => {
     let doc$, download$;
     if (downloadIds.length) {
       const { rxq } = useSession()[0];
@@ -79,6 +96,10 @@ export default withStyles(styles)(
           <div className={classNames("title", classes.tileTitle)}>{title}</div>
         ) : null}
         <div className="tile__content">{children}</div>
+        {footer ? <div className={classes.tileFooter}>
+        <hr className={classes.line} />
+          <div>{footer}</div>
+          </div> : null}
       </div>
     );
   }
