@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "react-jss";
 import arrow from "../../resources/images/right-arrow.png";
@@ -22,7 +23,7 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(({ url, className, classes }) => {
+const AnalystButton = ({ url, className, classes }) => {
   return (
     <a
       className={classNames("analyst-link", classes.analystLink, className)}
@@ -39,4 +40,13 @@ export default withStyles(styles)(({ url, className, classes }) => {
       />
     </a>
   );
-});
+};
+
+AnalystButton.propTypes = {
+  /** url where button links to */
+  url: PropTypes.string,
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
+};
+
+export default withStyles(styles)(AnalystButton);

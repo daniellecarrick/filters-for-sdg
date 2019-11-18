@@ -3,7 +3,7 @@ import BrandSelector from ".";
 import { SessionProvider } from "../../context";
 import { adOpsConfig, consumerMarketingConfig } from "../../config";
 
-export default { title: "Brand Selector" };
+export default { title: "Brand Selector", component: BrandSelector };
 
 export const basic = () => {
   const [selectedBrand, setSelectedBrand] = useState("-");
@@ -11,7 +11,7 @@ export const basic = () => {
   return (
     <SessionProvider qlikConfig={adOpsConfig}>
       <div>Selected Brand: {selectedBrand}</div>
-      <div style={{ backgroundColor: "#343a40" }}>
+      <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
         <BrandSelector field="BrandCD" setSelectedBrand={setSelectedBrand} />
       </div>
     </SessionProvider>
@@ -24,7 +24,7 @@ export const singleSelect = () => {
   return (
     <SessionProvider qlikConfig={adOpsConfig}>
       <div>Selected Brand: {selectedBrand}</div>
-      <div style={{ backgroundColor: "#343a40" }}>
+      <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
         <BrandSelector
           field="BrandCD"
           singleSelect
@@ -37,7 +37,7 @@ export const singleSelect = () => {
 
 export const mapping = () => (
   <SessionProvider qlikConfig={consumerMarketingConfig}>
-    <div style={{ backgroundColor: "#343a40" }}>
+    <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
       <BrandSelector
         field="PUBLICATION"
         fieldMap={{

@@ -36,14 +36,7 @@ const styles = {
   },
 };
 
-const Button = ({
-  theme, // Icon = null,
-  size,
-  onClick,
-  className,
-  classes,
-  children,
-}) => {
+const Button = ({ theme, size, onClick, className, classes, children }) => {
   return (
     <button
       className={classNames("button", classes.button, className, {
@@ -65,6 +58,8 @@ Button.propTypes = {
   size: PropTypes.oneOf(["sm", "lg"]),
   /** Function run when button clicked */
   onClick: PropTypes.func,
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { Button } from "../";
 import { useSession } from "../../context";
 import { Subject } from "rxjs";
@@ -13,40 +14,51 @@ const styles = {
   clearButton__refreshIcon: { width: "12px", marginLeft: "10px" },
 };
 
-export default withStyles(styles)(
-  ({ onClear = () => {}, className, classes }) => {
-    const {
-      rxq: { doc$ },
-    } = useSession()[0];
+const ClearButton = ({ onClear, className, classes }) => {
+  const {
+    rxq: { doc$ },
+  } = useSession()[0];
 
-    const clear$ = useRef(new Subject()).current;
-    useEffect(() => {
-      const sub$ = clear$
-        .pipe(
-          withLatestFrom(doc$),
-          pluck(1),
-          qAskReplayRetry("ClearAll")
-        )
-        .subscribe(() => onClear());
+  const clear$ = useRef(new Subject()).current;
+  useEffect(() => {
+    const sub$ = clear$
+      .pipe(
+        withLatestFrom(doc$),
+        pluck(1),
+        qAskReplayRetry("ClearAll")
+      )
+      .subscribe(() => onClear());
 
-      return () => sub$.unsubscribe();
-    }, [clear$, doc$]);
+    return () => sub$.unsubscribe();
+  }, [clear$, doc$]);
 
-    return (
-      <Button
-        theme="light"
-        className={classNames("clear-button", className, classes.clearButton)}
-        onClick={() => clear$.next()}
-      >
-        Clear Filters
-        <img
-          className={classNames(
-            "clear-button__refresh-icon",
-            classes.clearButton__refreshIcon
-          )}
-          src={refresh}
-        />
-      </Button>
-    );
-  }
-);
+  return (
+    <Button
+      theme="light"
+      className={classNames("clear-button", className, classes.clearButton)}
+      onClick={() => clear$.next()}
+    >
+      Clear Filters
+      <img
+        className={classNames(
+          "clear-button__refresh-icon",
+          classes.clearButton__refreshIcon
+        )}
+        src={refresh}
+      />
+    </Button>
+  );
+};
+
+ClearButton.propTypes = {
+  /** function run when the clear has completed */
+  onClear: PropTypes.func,
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
+};
+
+ClearButton.defaultProps = {
+  onClear: () => {},
+};
+
+export default withStyles(styles)(ClearButton);
