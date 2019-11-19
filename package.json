@@ -9,6 +9,7 @@
     "bundle-dist": "node scripts/bundle-dist",
     "build:dist": "npm run copy-package && npm run build:cjs && npm run bundle-dist",
     "storybook": "start-storybook -p 3000",
+    "build-storybook": "build-storybook -c .storybook -o .storybook-build",
     "update-beta-patch": "npm version prepatch --preid beta",
     "publish-beta": "npm run update-beta-patch && npm run build:dist && cd dist && npm publish --tag beta"
   },

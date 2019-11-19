@@ -10,5 +10,6 @@ export { default as Dropdown } from "./Dropdown";
 export { default as Kpi } from "./Kpi";
 export { default as Navigator } from "./Navigator";
 export { default as QdtComponent } from "./QdtComponent";
+export { default as QlikFilter } from "./QlikFilter";
 export { default as Switch } from "./Switch";
 export { default as Tile } from "./Tile";
