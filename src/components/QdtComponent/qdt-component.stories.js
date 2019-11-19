@@ -3,7 +3,7 @@ import QdtComponent from ".";
 import { SessionProvider } from "../../context";
 import { adOpsConfig } from "../../config";
 
-export default { title: "QDT Component" };
+export default { title: "QDT Component", component: QdtComponent };
 // const prefix = window.location.pathname.substr(
 //   0,
 //   window.location.pathname.toLowerCase().lastIndexOf("/extensions")
