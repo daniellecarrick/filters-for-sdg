@@ -5,7 +5,7 @@ import { adOpsConfig } from "../../config";
 import { qAskReplayRetry } from "../../operators";
 import { invalidations } from "rxq";
 
-export default { title: "Kpi" };
+export default { title: "Kpi", component: Kpi };
 
 export const basic = () => <Kpi label="My KPI">$12.4M</Kpi>;
 

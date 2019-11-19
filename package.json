@@ -8,7 +8,7 @@
     "build:cjs": "babel ./src --out-dir dist --ignore node_modules,dist --copy-files",
     "bundle-dist": "node scripts/bundle-dist",
     "build:dist": "npm run copy-package && npm run build:cjs && npm run bundle-dist",
-    "storybook": "NODE_ENV=development start-storybook -p 3000",
+    "storybook": "start-storybook -p 3000",
     "update-beta-patch": "npm version prepatch --preid beta",
     "publish-beta": "npm run update-beta-patch && npm run build:dist && cd dist && npm publish --tag beta"
   },
@@ -35,7 +35,8 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
-    "@storybook/react": "^5.2.5",
+    "@storybook/addon-docs": "^5.2.6",
+    "@storybook/react": "^5.2.6",
     "babel-loader": "^8.0.6"
   }
 }

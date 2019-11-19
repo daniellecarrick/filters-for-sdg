@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import withStyles from "react-jss";
 import { useCurrentSelections } from "../../hooks";
 import classNames from "classnames";
@@ -9,7 +10,7 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(({ className, classes }) => {
+const CurrentSelections = ({ className, classes }) => {
   const currentSelections = useCurrentSelections();
 
   return currentSelections !== null && currentSelections !== "-" ? (
@@ -17,4 +18,11 @@ export default withStyles(styles)(({ className, classes }) => {
       {currentSelections}
     </div>
   ) : null;
-});
+};
+
+CurrentSelections.propTypes = {
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
+};
+
+export default withStyles(styles)(CurrentSelections);

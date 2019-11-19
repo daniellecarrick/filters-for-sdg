@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { fromEvent } from "rxjs";
 import { tap } from "rxjs/operators";
 import classNames from "classnames";
@@ -48,7 +49,7 @@ const styles = {
   navigator__tooltip_hidden: { display: "none" },
 };
 
-export default withStyles(styles)(({ positions = [], className, classes }) => {
+const Navigator = ({ positions = [], className, classes }) => {
   const [selectedPosition, setSelectedPosition] = useState(0);
   const [refPositions, setRefPositions] = useState([]);
 
@@ -122,4 +123,23 @@ export default withStyles(styles)(({ positions = [], className, classes }) => {
       </div>
     </div>
   );
-});
+};
+
+Navigator.propTypes = {
+  /** page element positions */
+  positions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      anchor: PropTypes.string,
+      label: PropTypes.string,
+    })
+  ),
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
+};
+
+Navigator.defaultProps = {
+  positions: [],
+};
+
+export default withStyles(styles)(Navigator);
