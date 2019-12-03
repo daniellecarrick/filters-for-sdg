@@ -18,6 +18,9 @@ const styles = {
     padding: "16px",
     backgroundColor: "#fff",
     fontFamily: "Rubik !important",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   tileTitle: {
     marginBottom: "30px",
