@@ -1,3 +1,7 @@
-import { adOpsConfig, consumerMarketingConfig } from "./qlik-config";
+import {
+  adOpsConfig,
+  consumerMarketingConfig,
+  socialConfig,
+} from "./qlik-config";
 
-export { adOpsConfig, consumerMarketingConfig };
+export { adOpsConfig, consumerMarketingConfig, socialConfig };
