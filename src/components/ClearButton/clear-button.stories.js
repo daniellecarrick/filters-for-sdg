@@ -1,12 +1,12 @@
 import React from "react";
-import DownloadButton from ".";
+import ClearButton from ".";
 import { SessionProvider } from "../../context";
 import { adOpsConfig } from "../../config";
 
-export default { title: "Download Button" };
+export default { title: "Clear Button", component: ClearButton };
 
 export const basic = () => (
   <SessionProvider qlikConfig={adOpsConfig}>
-    <DownloadButton downloadIds={["HsZtQjK"]} />
+    <ClearButton />
   </SessionProvider>
 );

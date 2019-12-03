@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from ".";
 
-export default { title: "Dropdown" };
+export default { title: "Dropdown", component: Dropdown };
 
 export const basic = () => <Dropdown>Dropdown Content</Dropdown>;
 

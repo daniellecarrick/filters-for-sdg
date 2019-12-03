@@ -4,7 +4,7 @@ import CurrentSelections from ".";
 import { SessionProvider } from "../../context";
 import { adOpsConfig } from "../../config";
 
-export default { title: "Current Selections" };
+export default { title: "Current Selections", component: CurrentSelections };
 
 export const basic = () => (
   <SessionProvider qlikConfig={adOpsConfig}>

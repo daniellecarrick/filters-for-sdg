@@ -1,0 +1,14 @@
+<script>
+  ["log", "info", "warn", "error"].forEach(function(methodName) {
+    var oldMethod = window.console[methodName];
+    window.console[methodName] = function() {
+      var all = Array.from(arguments).join(" ");
+      if (
+        all.indexOf('":first-child" is potentially unsafe') >= 0 ||
+        all.indexOf("Please update the following components: Draggable") >= 0
+      )
+        return;
+      oldMethod.apply(window.console, arguments);
+    };
+  });
+</script>

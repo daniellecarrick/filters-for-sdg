@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Switch as MUISwitch } from "@material-ui/core";
 import withStyles from "react-jss";
 import classNames from "classnames";
@@ -44,6 +45,23 @@ const Switch = ({
       </span>
     </div>
   );
+};
+
+Switch.propTypes = {
+  /** text to left of switch */
+  textLeft: PropTypes.string,
+  /** value when switch is in left position */
+  valueLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** text to right of switch */
+  textRight: PropTypes.string,
+  /** value when switch is in right position */
+  valueRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** state controller of button. takes in an array where the first value
+   * is the current state of the switch, and the second is the state change
+   * function that updates the state */
+  state: PropTypes.array,
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
 };
 
 export default withStyles(styles)(Switch);
