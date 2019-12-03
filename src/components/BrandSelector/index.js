@@ -108,11 +108,12 @@ const BrandSelector = ({
               };
             } else return brand;
           });
-          const existingBrands = mappedBrandList.map(brand => brand.code);
-          return fullBrandList
-            .filter(brand => !existingBrands.includes(brand.code))
-            .concat(...mappedBrandList)
-            .filter(brand => brand.code !== undefined);
+          return mappedBrandList;
+          // const existingBrands = mappedBrandList.map(brand => brand.code);
+          // return fullBrandList
+          //   .filter(brand => !existingBrands.includes(brand.code))
+          //   .concat(...mappedBrandList)
+          //   .filter(brand => brand.code !== undefined);
         }),
         tap(brandList => {
           const selectedBrand = brandList.filter(
@@ -163,6 +164,7 @@ const BrandSelector = ({
       selectionSub$.unsubscribe();
     };
   }, [doc$, selectBrand$, field]);
+  console.log(brandList);
 
   return (
     <div className={classNames(classes.brandDropdown__container, className)}>
