@@ -45,9 +45,10 @@ const componentStyles = {
     color: "#3A3A3A",
     display: "flex",
     cursor: "pointer",
-    padding: "8px 12px",
+    padding: "6px 10px",
     border: ["1px", "solid", "#DCE0E0"],
     fontSize: "12px",
+    whiteSpace: "nowrap",
   },
   selected: {
     backgroundColor: "#4A4A4A",
@@ -392,9 +393,7 @@ const QlikFilterComponent = ({ classes, fieldName, displayName }) => {
     });
     // if we're over the character limit, just put the # of selections
     if (display.length > CHAR_LIMIT) {
-      display = `${displayName} (${selectedValues.length}/${
-        layout.qListObject.qDimensionInfo.qCardinal
-      })`;
+      display = `${displayName} (${selectedValues.length}/${layout.qListObject.qDimensionInfo.qCardinal})`;
     }
   }
 
