@@ -41,12 +41,12 @@ const componentStyles = {
   },
   filterBox: {
     borderRadius: "3px",
-    backgroundColor: "rgba(234,235,236, 0.57)",
-    color: "#3A3A3A",
+    backgroundColor: "white",
+    // color: "#3A3A3A",
     display: "flex",
     cursor: "pointer",
     padding: "6px 10px",
-    border: ["1px", "solid", "#DCE0E0"],
+    border: ["1px", "solid", "#4a4a4a"],
     fontSize: "12px",
     whiteSpace: "nowrap",
   },
@@ -55,7 +55,7 @@ const componentStyles = {
     color: "#FFFFFF",
   },
   openBox: {
-    backgroundColor: "#C2C9D1",
+    backgroundColor: "#4a4a4a",
     color: "white",
     fontWeight: 600,
   },
@@ -137,6 +137,7 @@ const componentStyles = {
     margin: "auto 0px",
     height: "12px",
     width: "12px",
+    imageRendering: "crisp-edges",
   },
   loading: {
     opacity: 0.2,
