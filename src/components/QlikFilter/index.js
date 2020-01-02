@@ -41,7 +41,7 @@ const componentStyles = {
   },
   filterBox: {
     borderRadius: "3px",
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     // color: "#3A3A3A",
     display: "flex",
     cursor: "pointer",
@@ -57,7 +57,7 @@ const componentStyles = {
   openBox: {
     backgroundColor: "#4a4a4a",
     color: "white",
-    fontWeight: 600,
+    fontWeight: 500,
   },
   fieldName: {
     margin: "auto",
@@ -69,7 +69,7 @@ const componentStyles = {
   },
   listContainer: {
     borderRadius: "2px",
-    boxShadow: [0, "2px", "3px", 0, "rgba(71,70,71,0.26)"],
+    boxShadow: [1, 2, 10, 0, "rgba(71,70,71,0.15)"],
     border: ["1px", "solid", "rgba(71,70,71,0.26)"],
     background: "#FFFFFF",
     position: "absolute",
@@ -114,6 +114,7 @@ const componentStyles = {
     fontWeight: "normal",
     fontSize: "10px",
     color: "#C2C9D1",
+    marginBottom: "5px",
     cursor: "pointer",
     "&:hover": {
       color: "black",
