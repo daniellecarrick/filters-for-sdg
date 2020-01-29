@@ -1,13 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import {
-  AppBar,
-  MenuItem,
-  Toolbar,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
@@ -61,6 +55,11 @@ const Menu = ({ classes, className }) => {
   );
 };
 
-Menu.defaultProps = {};
+Menu.defaultProps = {
+  // /** Label above kpi */
+  // classes: PropTypes.string,
+  // /** className that can access the top level element of this component */
+  // className: PropTypes.string,
+};
 
 export default withStyles(styles)(Menu);
