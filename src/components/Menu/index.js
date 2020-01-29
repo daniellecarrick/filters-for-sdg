@@ -8,28 +8,55 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   root: {
     flexGrow: 1,
-    backgroundColor: "red",
+    backgroundColor: "white",
+  },
+  toolbar: {
+    justifyContent: "space-between",
   },
   menuButton: {
-    // marginRight: theme.spacing(2),
+    color: "black",
   },
   title: {
-    flexGrow: 1,
+    color: "black",
   },
-  "MuiAppBar-colorDefault": {
-    color: "red",
-  },
+  calendar: {},
 };
 
 const Menu = ({ classes, className }) => {
   return (
     <AppBar position="sticky" className={clsx(classes.root, className)}>
-      <Toolbar>the menu</Toolbar>
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="menu"
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </IconButton>
+
+        <Typography variant="h6" className={classes.title}>
+          DASH
+        </Typography>
+        <div className={classes.calendar}>
+          <IconButton
+            edge="end"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="calendar"
+          >
+            <FontAwesomeIcon icon={faCalendarAlt} />
+          </IconButton>
+        </div>
+      </Toolbar>
     </AppBar>
   );
 };
