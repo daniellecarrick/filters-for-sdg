@@ -6,6 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { withStyles } from "@material-ui/core/styles";
+import DashLogo from "../DashLogo";
 
 const styles = {
   root: {
@@ -37,9 +38,7 @@ const Menu = ({ classes, className }) => {
           <FontAwesomeIcon icon={faBars} />
         </IconButton>
 
-        <Typography variant="h6" className={classes.title}>
-          DASH
-        </Typography>
+        <DashLogo />
         <div className={classes.calendar}>
           <IconButton
             edge="end"
