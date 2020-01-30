@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import DashLogo from "../DashLogo";
+import HamburgerIcon from "../../resources/images/hamburger.png";
+import CalendarIcon from "../../resources/images/calendar.png";
 
 const styles = {
   root: {
@@ -19,13 +18,22 @@ const styles = {
   menuButton: {
     color: "black",
   },
+  titleContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
   title: {
     color: "black",
+    fontSize: "12px",
+    marginLeft: "10px",
+    "@media screen and (max-width: 375px)": {
+      maxWidth: "50px",
+    },
   },
   calendar: {},
 };
 
-const Menu = ({ classes, className }) => {
+const Menu = ({ classes, className, title }) => {
   return (
     <AppBar position="sticky" className={clsx(classes.root, className)}>
       <Toolbar className={classes.toolbar}>
@@ -35,10 +43,11 @@ const Menu = ({ classes, className }) => {
           color="inherit"
           aria-label="menu"
         >
-          <FontAwesomeIcon icon={faBars} />
+          <img src={HamburgerIcon} />
         </IconButton>
-
-        <DashLogo />
+        <div className={classes.titleContainer}>
+          <DashLogo /> <span className={classes.title}>{title}</span>
+        </div>
         <div className={classes.calendar}>
           <IconButton
             edge="end"
@@ -46,7 +55,7 @@ const Menu = ({ classes, className }) => {
             color="inherit"
             aria-label="calendar"
           >
-            <FontAwesomeIcon icon={faCalendarAlt} />
+            <img src={CalendarIcon} />
           </IconButton>
         </div>
       </Toolbar>
