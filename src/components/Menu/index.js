@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import {
@@ -43,9 +43,15 @@ const styles = {
   calendar: {},
 };
 
-const DashMenu = ({ classes, className, title = "" }) => {
+const DashMenu = ({
+  classes,
+  className,
+  title = "",
+  datePicker = "",
+  drawer = "",
+}) => {
   const hasLogo = title.includes("png");
-
+  const [isDrawerOpen, setDrawer] = useState(false);
   return (
     <>
       <AppBar position="sticky" className={clsx(classes.root, className)}>
@@ -55,6 +61,7 @@ const DashMenu = ({ classes, className, title = "" }) => {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={() => setDrawer(true)}
           >
             <img src={HamburgerIcon} />
           </IconButton>
@@ -80,18 +87,7 @@ const DashMenu = ({ classes, className, title = "" }) => {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={true}>
-        <List>
-          <ListItem>ListItem</ListItem>
-          <ListItem>ListItem</ListItem>
-          <ListItem>ListItem</ListItem>
-        </List>
-      </Drawer>
-      {/* <Menu open={true}>
-        <MenuItem>MenuItem</MenuItem>
-        <MenuItem>MenuItem</MenuItem>
-        <MenuItem>MenuItem</MenuItem>
-      </Menu> */}
+      {isDrawerOpen ? drawer : null}
     </>
   );
 };

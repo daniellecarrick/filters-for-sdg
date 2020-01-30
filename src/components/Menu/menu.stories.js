@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from ".";
+import { MenuDrawer } from "../index";
 import * as brandImages from "../../resources/images/brands";
 import { cmExecDashConfig } from "../../config";
 import { SessionProvider } from "../../context";
@@ -16,6 +17,19 @@ export const brandPage = () => (
 
 export const withFilters = () => (
   <SessionProvider qlikConfig={cmExecDashConfig}>
-    <Menu className={"class-name"} />
+    <Menu
+      className={"class-name"}
+      drawer={
+        <MenuDrawer
+          list={[
+            "Vanity Fair",
+            "The New Yorker",
+            "Wired",
+            "Other Brands",
+            "Products",
+          ]}
+        />
+      }
+    />
   </SessionProvider>
 );

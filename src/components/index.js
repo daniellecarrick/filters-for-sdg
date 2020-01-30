@@ -15,3 +15,4 @@ export { default as QlikFilter } from "./QlikFilter";
 export { default as Switch } from "./Switch";
 export { default as Tile } from "./Tile";
 export { default as DashLogo } from "./DashLogo";
+export { default as MenuDrawer } from "./MenuDrawer";
