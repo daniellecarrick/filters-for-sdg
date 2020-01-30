@@ -36,7 +36,7 @@ export const mapping = () => (
         SELF: "SELF",
         "Teen Vogue": "VOGT",
         "The New Yorker": "TNY",
-        "Them": "THEM",
+        Them: "THEM",
         "Vanity Fair": "VF",
         Vogue: "VOG",
         W: "W",
