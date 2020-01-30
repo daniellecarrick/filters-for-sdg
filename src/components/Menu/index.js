@@ -11,6 +11,7 @@ const styles = {
   root: {
     flexGrow: 1,
     backgroundColor: "white",
+    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
   },
   toolbar: {
     justifyContent: "space-between",
