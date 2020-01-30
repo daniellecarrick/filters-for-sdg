@@ -14,3 +14,5 @@ export { default as VF } from "./VF.png";
 export { default as VOG } from "./VOG.png";
 export { default as VOGT } from "./VOGT.png";
 export { default as WIRE } from "./WIRE.png";
+
+export { default as WIREBLACK } from "./WIRE-black.png";

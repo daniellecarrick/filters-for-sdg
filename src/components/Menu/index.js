@@ -34,7 +34,8 @@ const styles = {
   calendar: {},
 };
 
-const Menu = ({ classes, className, title }) => {
+const Menu = ({ classes, className, title = "" }) => {
+  const isLogo = title.includes("png");
   return (
     <AppBar position="sticky" className={clsx(classes.root, className)}>
       <Toolbar className={classes.toolbar}>
@@ -46,9 +47,16 @@ const Menu = ({ classes, className, title }) => {
         >
           <img src={HamburgerIcon} />
         </IconButton>
-        <div className={classes.titleContainer}>
-          <DashLogo /> <span className={classes.title}>{title}</span>
-        </div>
+        {isLogo ? (
+          <div className={classes.titleContainer}>
+            <img className={classes.title} src={title} />
+          </div>
+        ) : (
+          <div className={classes.titleContainer}>
+            <DashLogo /> <span className={classes.title}>{title}</span>
+          </div>
+        )}
+
         <div className={classes.calendar}>
           <IconButton
             edge="end"
