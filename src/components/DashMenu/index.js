@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  List,
-  ListItem,
-  Menu,
-  MenuItem,
-  Drawer,
-} from "@material-ui/core";
+import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import DashLogo from "../DashLogo";
 import HamburgerIcon from "../../resources/images/hamburger.png";
@@ -46,12 +37,15 @@ const styles = {
 const DashMenu = ({
   classes,
   className,
+  children,
   title = "",
+  state: [value, onChange] = [false, () => {}],
   datePicker = "",
-  drawer = "",
 }) => {
   const hasLogo = title.includes("png");
-  const [isDrawerOpen, setDrawer] = useState(false);
+  const handleChange = () => {
+    onChange(value ? false : true);
+  };
   return (
     <>
       <AppBar position="sticky" className={clsx(classes.root, className)}>
@@ -61,7 +55,7 @@ const DashMenu = ({
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-            onClick={() => setDrawer(true)}
+            onClick={handleChange}
           >
             <img src={HamburgerIcon} />
           </IconButton>
@@ -87,7 +81,7 @@ const DashMenu = ({
           </div>
         </Toolbar>
       </AppBar>
-      {isDrawerOpen ? drawer : null}
+      {value ? children : null}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { List, ListItem, Drawer } from "@material-ui/core";
@@ -26,40 +26,33 @@ const styles = {
   },
 };
 
-const MenuDrawer = ({ classes, className, list }) => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+const MenuDrawer = ({
+  classes,
+  children,
+  state: [value, onChange] = [false, () => {}],
+}) => {
+  console.log("menu drawer value", value);
 
-  const toggleDrawer = (side, open) => event => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [side]: open });
+  const handleChange = () => {
+    onChange(value ? false : true);
   };
   return (
     <>
       <Drawer
         anchor="left"
-        open={true}
+        open={value}
         className={classes.root}
-        onClick={toggleDrawer("left", false)}
+        onClick={handleChange}
       >
         <List>
-          <ListItem className={classes.goHome}>
+          <ListItem
+            className={classes.goHome}
+            onClick={() => console.log("home")}
+          >
             <img src={ArrowLeft} className={classes.arrow} />
             Home
           </ListItem>
-          {list.map((text, i) => (
-            <ListItem className={classes.listitem}>{text}</ListItem>
-          ))}
+          {children}
         </List>
       </Drawer>
     </>

@@ -8,7 +8,7 @@ export { default as CurrentSelections } from "./CurrentSelections";
 export { default as DownloadButton } from "./DownloadButton";
 export { default as Dropdown } from "./Dropdown";
 export { default as Kpi } from "./Kpi";
-export { default as Menu } from "./Menu";
+export { default as Menu } from "./DashMenu";
 export { default as Navigator } from "./Navigator";
 export { default as QdtComponent } from "./QdtComponent";
 export { default as QlikFilter } from "./QlikFilter";
