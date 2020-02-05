@@ -2,7 +2,7 @@ import React from "react";
 import Button from ".";
 import downloadIcon from "../../resources/images/download.svg";
 
-export default { title: "Button" };
+export default { title: "Button", component: Button };
 
 export const basic = () => <Button>Button</Button>;
 

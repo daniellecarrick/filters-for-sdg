@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Switch from ".";
 
-export default { title: "Switch" };
+export default { title: "Switch", component: Switch };
 
 export const basic = () => <Switch />;
 

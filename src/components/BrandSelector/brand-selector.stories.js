@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import BrandSelector from ".";
 import { SessionProvider } from "../../context";
-import { adOpsConfig, consumerMarketingConfig } from "../../config";
+import {
+  adOpsConfig,
+  consumerMarketingConfig,
+  socialConfig,
+} from "../../config";
 
-export default { title: "Brand Selector" };
+export default { title: "Brand Selector", component: BrandSelector };
 
 export const basic = () => {
   const [selectedBrand, setSelectedBrand] = useState("-");
 
   return (
-    <SessionProvider qlikConfig={adOpsConfig}>
+    <SessionProvider qlikConfig={socialConfig}>
       <div>Selected Brand: {selectedBrand}</div>
-      <div style={{ backgroundColor: "#343a40" }}>
-        <BrandSelector field="BrandCD" setSelectedBrand={setSelectedBrand} />
+      <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
+        <BrandSelector field="brand" setSelectedBrand={setSelectedBrand} />
       </div>
     </SessionProvider>
   );
@@ -24,7 +28,7 @@ export const singleSelect = () => {
   return (
     <SessionProvider qlikConfig={adOpsConfig}>
       <div>Selected Brand: {selectedBrand}</div>
-      <div style={{ backgroundColor: "#343a40" }}>
+      <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
         <BrandSelector
           field="BrandCD"
           singleSelect
@@ -36,28 +40,26 @@ export const singleSelect = () => {
 };
 
 export const mapping = () => (
-  <SessionProvider qlikConfig={consumerMarketingConfig}>
-    <div style={{ backgroundColor: "#343a40" }}>
+  <SessionProvider qlikConfig={socialConfig}>
+    <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
       <BrandSelector
-        field="PUBLICATION"
+        field="brand"
         fieldMap={{
           Allure: "ALL",
           "Architectural Digest": "AD",
           "Ars Technica": "ARST",
           "Bon Appetit": "BA",
-          Brides: "BRDE",
-          "Conde Nast Traveler": "CNT",
+          "CN Traveler": "CNT",
           Epicurious: "EPIC",
           Glamour: "GLAM",
-          "Golf Digest": "GFDG",
           GQ: "GQ",
           Pitchfork: "PTFK",
-          SELF: "SELF",
+          Self: "SELF",
           "Teen Vogue": "VOGT",
           "The New Yorker": "TNY",
+          Them: "THEM",
           "Vanity Fair": "VF",
           Vogue: "VOG",
-          W: "W",
           Wired: "WIRE",
         }}
       />

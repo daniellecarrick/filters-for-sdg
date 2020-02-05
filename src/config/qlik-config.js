@@ -13,3 +13,19 @@ export const consumerMarketingConfig = {
   port: 443,
   appname: "d335e50d-f3ff-47d5-8927-cada9fe4bab6",
 };
+
+export const socialConfig = {
+  name: "Social",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "4e9cec7f-947b-455a-95c7-f14d83a993a5",
+};
+
+export const cmExecDashConfig = {
+  name: "CM Exec Dashboard",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "26567b01-98b6-4228-9439-5514bd663ff7",
+};

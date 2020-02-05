@@ -1,0 +1,10 @@
+export { default as changeSort } from "./changeSort";
+export { default as getDifference } from "./getDifference";
+export { default as getOpportunities } from "./getOpportunities";
+export { default as getTableData } from "./getTableData";
+export { default as iconMapping } from "./iconMapping";
+export { default as index } from "./index";
+export { default as numberFormatting } from "./numberFormatting";
+export { default as qlikFunctions } from "./qlikFunctions";
+export { default as urlUtils } from "./urlUtils";
+export { default as useWidth } from "./useWidth";

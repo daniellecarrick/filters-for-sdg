@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import withStyles from "react-jss";
 
@@ -16,7 +17,7 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(({ label, className, classes, children }) => {
+const Kpi = ({ label, className, classes, children }) => {
   return (
     <div className={classNames("kpi", classes.kpi, className)}>
       <div className={classNames("kpi__label", classes.kpi__label)}>
@@ -27,4 +28,13 @@ export default withStyles(styles)(({ label, className, classes, children }) => {
       </div>
     </div>
   );
-});
+};
+
+Kpi.propTypes = {
+  /** Label above kpi */
+  label: PropTypes.string,
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
+};
+
+export default withStyles(styles)(Kpi);

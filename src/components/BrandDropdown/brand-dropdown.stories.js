@@ -3,7 +3,7 @@ import BrandDropdown from ".";
 import { SessionProvider } from "../../context";
 import { adOpsConfig, consumerMarketingConfig } from "../../config";
 
-export default { title: "Brand Dropdown" };
+export default { title: "Brand Dropdown", component: BrandDropdown };
 
 export const basic = () => (
   <SessionProvider qlikConfig={adOpsConfig}>
@@ -36,6 +36,7 @@ export const mapping = () => (
         SELF: "SELF",
         "Teen Vogue": "VOGT",
         "The New Yorker": "TNY",
+        Them: "THEM",
         "Vanity Fair": "VF",
         Vogue: "VOG",
         W: "W",

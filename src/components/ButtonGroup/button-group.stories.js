@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ButtonGroup from ".";
 
-export default { title: "Button Group" };
+export default { title: "Button Group", component: ButtonGroup };
 
 const buttons = [
   { name: "apple", label: "Apple" },
