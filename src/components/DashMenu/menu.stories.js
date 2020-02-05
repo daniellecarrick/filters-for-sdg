@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DashMenu from ".";
 import { MenuDrawer } from "../index";
-import { List, ListItem, Drawer } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
 import * as brandImages from "../../resources/images/brands";
 import { cmExecDashConfig } from "../../config";
 import { SessionProvider } from "../../context";
