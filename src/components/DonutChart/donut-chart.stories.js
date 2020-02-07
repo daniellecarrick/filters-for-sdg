@@ -1,6 +1,5 @@
 import React from "react";
 import DonutChart from ".";
-import { SessionProvider } from "../../context";
 
 export default { title: "Donut Chart", component: DonutChart };
 const data = [
