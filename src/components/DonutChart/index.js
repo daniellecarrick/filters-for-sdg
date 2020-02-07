@@ -3,6 +3,7 @@ import withStyles from "react-jss";
 import * as d3 from "d3";
 import Arc from "../ChartComponents/arc";
 import LegendItem from "../ChartComponents/legend-item";
+import PropTypes from "prop-types";
 
 const style = {
   wholeContainer: {
@@ -47,7 +48,6 @@ const DonutChart = ({
   outerRadius,
   data,
   legendData,
-  title,
   colors,
 }) => {
   var pie = d3.pie().value(d => d.value)(data);
@@ -89,5 +89,22 @@ const DonutChart = ({
     </div>
   );
 };
+DonutChart.propTypes = {
+  /** Outer radius is the radius of the outer circle in the donut chart */
+  outerRadius: PropTypes.number,
+  /** Inner radius is the radius of the inner circle in the donut chart */
+  innerRadius: PropTypes.number,
+  /** data is the object that contains our data to be displayed in the donut chart */
+  data: PropTypes.object,
+  /** legenData is the object that contains our data to be displayed in the Legend & variance */
+  legendData: PropTypes.object,
+  /** Colors is an array that contains list of hexadecimal color values to be displayed in the donut chart */
+  colors: PropTypes.array,
+};
 
+DonutChart.defaultProps = {
+  outerRadius: 90,
+  innerRadius: 60,
+  colors: ["#55B1F3", "#3A66BB", "#C4C4C4"],
+};
 export default withStyles(style)(DonutChart);
