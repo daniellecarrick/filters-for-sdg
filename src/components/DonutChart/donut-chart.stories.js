@@ -1,6 +1,5 @@
 import React from "react";
 import DonutChart from ".";
-import Variance from "../ChartComponents/variance";
 
 export default { title: "Donut Chart", component: DonutChart };
 const data = [
