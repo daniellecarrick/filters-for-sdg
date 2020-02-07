@@ -6,23 +6,23 @@ const styles = {
     display: "flex",
     flexDoirection: "row",
     padding: "10px",
-    margin: "10px 10px 10px 20px"
+    margin: "10px 10px 10px 20px",
   },
   legendBlock: {
-    width: "10px"
+    width: "10px",
   },
   legendTextContainer: {
-    marginLeft: "10px"
+    marginLeft: "10px",
   },
   value: {
     fontWeight: "750",
     fontSize: "14px",
-    paddingBottom: "2px"
+    paddingBottom: "2px",
   },
   type: {
     fontSize: "12px",
-    paddingBottom: "2px"
-  }
+    paddingBottom: "2px",
+  },
 };
 const LegendItem = ({ classes, color, data }) => {
   return (

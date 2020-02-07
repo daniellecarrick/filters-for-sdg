@@ -46,6 +46,7 @@ const DonutChart = ({
   innerRadius,
   outerRadius,
   data,
+  legendData,
   title,
   colors,
 }) => {
@@ -79,26 +80,7 @@ const DonutChart = ({
           <div className={classes.legendContainer}>
             {legendData.map((d, i) => {
               return (
-                <LegendItem
-                  key={`legend-${i}`}
-                  data={[
-                    {
-                      type: "Unauthenticated",
-                      value: 4800,
-                      oldValue: 2600,
-                    },
-                    {
-                      type: "Authenticated",
-                      value: 420,
-                      oldValue: 1600,
-                    },
-                    {
-                      type: "Self Authenticated ",
-                      value: 3705,
-                    },
-                  ]}
-                  color={colors[i]}
-                />
+                <LegendItem key={`legend-${i}`} data={d} color={colors[i]} />
               );
             })}
           </div>
