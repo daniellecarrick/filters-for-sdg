@@ -95,7 +95,7 @@ DonutChart.propTypes = {
   /** Inner radius is the radius of the inner circle in the donut chart */
   innerRadius: PropTypes.number,
   /** data is the object that contains our data to be displayed in the donut chart */
-  data: PropTypes.object,
+  data: PropTypes.array,
   /** legenData is the object that contains our data to be displayed in the Legend & variance */
   legendData: PropTypes.object,
   /** Colors is an array that contains list of hexadecimal color values to be displayed in the donut chart */

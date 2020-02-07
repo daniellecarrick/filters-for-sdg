@@ -1,6 +1,6 @@
 import React from "react";
 import withStyles from "react-jss";
-import Variance from "./variance";
+import Variance from "../Variance";
 const styles = {
   legendContainer: {
     display: "flex",
