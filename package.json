@@ -1,6 +1,6 @@
 {
   "name": "dash-component-library",
-  "version": "0.5.6-beta.1",
+  "version": "0.5.7-beta.0",
   "description": "Component Library for Dash",
   "main": "index.js",
   "scripts": {
