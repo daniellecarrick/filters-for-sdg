@@ -43,10 +43,3 @@ export const basic = () => (
     legendData={legendData}
   />
 );
-
-export const variance = () => (
-  <>
-    <Variance newValue={4800} oldValue={6000} />
-    <Variance newValue={8800} oldValue={6000} />
-  </>
-);
