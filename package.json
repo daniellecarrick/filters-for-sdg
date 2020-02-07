@@ -17,7 +17,11 @@
   "author": "Conde Nast Data Visualization",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "@material-ui/core": "^4.4.2",
+    "@material-ui/icons": "^4.5.1",
     "classnames": "^2.2.6",
     "qdt-components": "1.3.28",
     "react": "^16.11.0",
