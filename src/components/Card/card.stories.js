@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from ".";
 
 export default { title: "Exec Dash Card", component: Card };
