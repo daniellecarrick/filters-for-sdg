@@ -6,6 +6,7 @@ const styles = {
     padding: "20px",
     margin: "10px",
     display: "flex",
+    justifyContent: "space-between",
     background: "white",
     boxShadow: "0px 0px 15px rgba(0,0,0,0.1)",
     borderRadius: "3px",
