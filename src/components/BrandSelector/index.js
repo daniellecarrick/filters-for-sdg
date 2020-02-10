@@ -39,8 +39,6 @@ const styles = {
   brandDropdown__input_selected: { opacity: 1 },
 };
 
-console.log("brand images", brandImages);
-
 const BrandSelector = ({
   field,
   fieldMap,
