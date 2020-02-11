@@ -32,7 +32,7 @@ const styles = {
 };
 
 const BulletChart = ({ classes, data, period }) => {
-  if (data) {
+  if (data && period) {
     const color =
       data[0].measures[0] > data[0].markers[0] ? "#12BF38" : "#EF4A4A";
     const gapToGoal = data[0].ranges[0] - data[0].measures[0];
