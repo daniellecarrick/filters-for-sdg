@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 const style = {
   wholeContainer: {
-    margin: "2% 0 0 2%",
+    margin: "5% 3% 5% 3%",
   },
   contentContainer: {
     display: "flex",
@@ -33,6 +33,7 @@ const style = {
     marginLeft: "-10%",
   },
   legendContainer: {
+    flex: 1,
     position: "absolute",
     left: "60%",
   },

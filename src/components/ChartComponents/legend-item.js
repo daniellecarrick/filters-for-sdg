@@ -16,9 +16,13 @@ const styles = {
     marginLeft: "10px",
   },
   value: {
+    flex: 1,
     fontWeight: "750",
     fontSize: "14px",
     paddingBottom: "2px",
+  },
+  variance: {
+    flex: 1,
   },
   type: {
     fontSize: "12px",
@@ -42,7 +46,9 @@ const LegendItem = ({ classes, color, data }) => {
             ? (data.value / 1000).toFixed(2) + "K"
             : data.value}
         </div>
-        <Variance newValue={data.value} oldValue={data.oldValue} />
+        <div className={classes.variance}>
+          <Variance newValue={data.value} oldValue={data.oldValue} />
+        </div>
       </div>
     </div>
   );
