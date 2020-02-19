@@ -32,3 +32,21 @@ export const withDrawer = () => {
     </SessionProvider>
   );
 };
+
+export const withDateString = () => {
+  const [openDrawer, setOpenDrawer] = useState(false);
+  return (
+    <SessionProvider qlikConfig={cmExecDashConfig}>
+      <DashMenu
+        className={"class-name"}
+        state={[openDrawer, setOpenDrawer]}
+        dateString={"Feb. 19, 2020"}
+      ></DashMenu>
+      <MenuDrawer state={[openDrawer, setOpenDrawer]}>
+        {["Wired", "The New Yorker", "Vanity Fair"].map((item, i) => {
+          return <ListItem>{item}</ListItem>;
+        })}
+      </MenuDrawer>
+    </SessionProvider>
+  );
+};
