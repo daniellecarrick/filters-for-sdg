@@ -75,7 +75,11 @@ const DonutChart = ({
             </g>
           </svg>
           <div className={classes.label}>
-            {total > 1000 ? (total / 1000).toFixed(2) + "k" : total}
+            {total > 100000
+              ? (total / 1000000).toFixed(2) + "M"
+              : total > 1000
+              ? (total / 1000).toFixed(2) + "K"
+              : total}
           </div>
           <div className={classes.legendContainer}>
             {legendData.map((d, i) => {

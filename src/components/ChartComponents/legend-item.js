@@ -10,6 +10,7 @@ const styles = {
   },
   legendBlock: {
     width: "10px",
+    height: "60px",
   },
   legendTextContainer: {
     marginLeft: "10px",
@@ -22,6 +23,10 @@ const styles = {
   type: {
     fontSize: "12px",
     paddingBottom: "2px",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    width: "120px",
+    textOverflow: "ellipsis",
   },
 };
 const LegendItem = ({ classes, color, data }) => {
@@ -31,8 +36,10 @@ const LegendItem = ({ classes, color, data }) => {
       <div className={classes.legendTextContainer}>
         <div className={classes.type}>{data.type}</div>
         <div className={classes.value}>
-          {data.value > 1000
-            ? (data.value / 1000).toFixed(1) + "k"
+          {data.value > 100000
+            ? (data.value / 1000000).toFixed(2) + "M"
+            : data.value > 1000
+            ? (data.value / 1000).toFixed(2) + "K"
             : data.value}
         </div>
         <Variance newValue={data.value} oldValue={data.oldValue} />
