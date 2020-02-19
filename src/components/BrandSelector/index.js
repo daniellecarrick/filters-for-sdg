@@ -58,24 +58,24 @@ const BrandSelector = ({
   const [brandList, setBrandList] = useState([]);
   const selectBrand$ = useRef(new Subject()).current;
   useEffect(() => {
-    const fullBrandList = [
-      { code: "ALL" },
-      { code: "AD" },
-      { code: "ARST" },
-      { code: "BA" },
-      { code: "CNT" },
-      { code: "EPIC" },
-      { code: "GLAM" },
-      { code: "GQ" },
-      { code: "PTFK" },
-      { code: "SELF" },
-      { code: "VOGT" },
-      { code: "TNY" },
-      { code: "THEM" },
-      { code: "VF" },
-      { code: "VOG" },
-      { code: "WIRE" },
-    ];
+    // const fullBrandList = [
+    //   { code: "ALL" },
+    //   { code: "AD" },
+    //   { code: "ARST" },
+    //   { code: "BA" },
+    //   { code: "CNT" },
+    //   { code: "EPIC" },
+    //   { code: "GLAM" },
+    //   { code: "GQ" },
+    //   { code: "PTFK" },
+    //   { code: "SELF" },
+    //   { code: "VOGT" },
+    //   { code: "TNY" },
+    //   { code: "THEM" },
+    //   { code: "VF" },
+    //   { code: "VOG" },
+    //   { code: "WIRE" },
+    // ];
 
     const brandListObj$ = doc$.pipe(
       qAskReplayRetry("CreateSessionObject", {
