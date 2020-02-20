@@ -6,7 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 import DashLogo from "../DashLogo";
 import HamburgerIcon from "../../resources/images/hamburger.png";
 import CalendarIcon from "../../resources/images/calendar.png";
-import Calendar from "../Calendar"
+import Calendar from "../Calendar";
+import moment from 'moment';
 
 const styles = {
   root: {
@@ -66,7 +67,10 @@ const DashMenu = ({
   const handleChange = () => {
     onChange(value ? false : true);
   };
-  console.log('title', title)
+  const [date, setDate] = useState(dateString);
+  const getDateString = (date) => {
+    setDate(moment(date).format("MMM. DD, YYYY"));
+  };
   return (
     <>
       <AppBar position="sticky" className={clsx(classes.root, className)}>
@@ -86,9 +90,9 @@ const DashMenu = ({
                 <img className={(title && title.length > 0) ? [classes.title, classes.titleText].join(' ') : classes.title} src={title} />
               </div>
               {
-                (dateString && dateString.length > 1 ) &&(
+                (date && date.length > 1 ) &&(
                   <div className={classes.titleBox}>
-                    <span className={classes.titleDate}>{dateString}</span>
+                    <span className={classes.titleDate}>{date}</span>
                   </div>
                 )
               }
@@ -99,9 +103,9 @@ const DashMenu = ({
                 <DashLogo /> <span className={(title && title.length > 0) ? [classes.title, classes.titleText].join(' ') : classes.title}>{title}</span>
               </div>
               {
-                (dateString && dateString.length > 0 ) && (
+                (date && date.length > 0 ) && (
                   <div className={classes.titleBox}>
-                    <span className={classes.titleDate}>{dateString}</span>
+                    <span className={classes.titleDate}>{date}</span>
                   </div>
                 )
               }
@@ -109,7 +113,9 @@ const DashMenu = ({
           )}
 
           <div className={classes.calendar}>
-            <Calendar/>
+            <Calendar
+              getDate = {getDateString}
+            />
           </div>
         </Toolbar>
       </AppBar>
