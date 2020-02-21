@@ -21,3 +21,11 @@ export const socialConfig = {
   port: 443,
   appname: "4e9cec7f-947b-455a-95c7-f14d83a993a5",
 };
+
+export const affiliateConfig = {
+  name: "Affiliate",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "81299c2f-3215-4b51-9508-05f30fed058b",
+};

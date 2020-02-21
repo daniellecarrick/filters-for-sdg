@@ -1,7 +1,11 @@
 import React from "react";
 import BrandDropdown from ".";
 import { SessionProvider } from "../../context";
-import { adOpsConfig, consumerMarketingConfig } from "../../config";
+import {
+  adOpsConfig,
+  consumerMarketingConfig,
+  affiliateConfig,
+} from "../../config";
 
 export default { title: "Brand Dropdown", component: BrandDropdown };
 
@@ -18,25 +22,25 @@ export const singleSelect = () => (
 );
 
 export const mapping = () => (
-  <SessionProvider qlikConfig={consumerMarketingConfig}>
+  <SessionProvider qlikConfig={affiliateConfig}>
     <BrandDropdown
-      field="PUBLICATION"
+      field="Brand"
       fieldMap={{
         Allure: "ALL",
         "Architectural Digest": "AD",
         "Ars Technica": "ARST",
         "Bon Appetit": "BA",
         Brides: "BRDE",
-        "Conde Nast Traveler": "CNT",
+        "CN Traveler": "CNT",
         Epicurious: "EPIC",
         Glamour: "GLAM",
         "Golf Digest": "GFDG",
         GQ: "GQ",
         Pitchfork: "PTFK",
-        SELF: "SELF",
+        Self: "SELF",
         "Teen Vogue": "VOGT",
         "The New Yorker": "TNY",
-        "Them": "THEM",
+        Them: "THEM",
         "Vanity Fair": "VF",
         Vogue: "VOG",
         W: "W",
