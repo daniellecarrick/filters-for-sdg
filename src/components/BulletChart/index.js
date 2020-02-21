@@ -1,5 +1,6 @@
 import React from "react";
 import withStyles from "react-jss";
+import PropTypes from "prop-types";
 import { ResponsiveBullet } from "@nivo/bullet";
 
 const styles = {
@@ -58,6 +59,21 @@ const BulletChart = ({ classes, data, period }) => {
       </div>
     );
   } else return null;
+};
+
+BulletChart.propTypes = {
+  /** The prop 'data' is an array of objects with three keys in each objects nameley 'ranges' , 'measures' & markers
+   * ranges defines the entire goal value
+   * markers defines the target that needs to be achieved from the entire goal
+   * measures defines how much we have reached so far
+   */
+  data: PropTypes.arrayOf({
+    ranges: PropTypes.arrayOf(PropTypes.number),
+    measures: PropTypes.arrayOf(PropTypes.number),
+    markers: PropTypes.arrayOf(PropTypes.number),
+  }),
+  /** The prop 'period' defines which period the bullet chart is being calculated for*/
+  period: PropTypes.string,
 };
 
 export default withStyles(styles)(BulletChart);
