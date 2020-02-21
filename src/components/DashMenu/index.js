@@ -6,8 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 import DashLogo from "../DashLogo";
 import HamburgerIcon from "../../resources/images/hamburger.png";
 import CalendarIcon from "../../resources/images/calendar.png";
-import Calendar from "../Calendar";
-import moment from 'moment';
 
 const styles = {
   root: {
@@ -61,16 +59,14 @@ const DashMenu = ({
   title = "",
   state: [value, onChange] = [false, () => {}],
   datePicker = "",
-  dateString = ""
+  dateString = "",
+  calendar
 }) => {
   const hasLogo = title.includes("png");
   const handleChange = () => {
     onChange(value ? false : true);
   };
-  const [date, setDate] = useState(dateString);
-  const getDateString = (date) => {
-    setDate(moment(date).format("MMM. DD, YYYY"));
-  };
+
   return (
     <>
       <AppBar position="sticky" className={clsx(classes.root, className)}>
@@ -90,9 +86,9 @@ const DashMenu = ({
                 <img className={(title && title.length > 0) ? [classes.title, classes.titleText].join(' ') : classes.title} src={title} />
               </div>
               {
-                (date && date.length > 1 ) &&(
+                (dateString && dateString.length > 1 ) &&(
                   <div className={classes.titleBox}>
-                    <span className={classes.titleDate}>{date}</span>
+                    <span className={classes.titleDate}>{dateString}</span>
                   </div>
                 )
               }
@@ -103,9 +99,9 @@ const DashMenu = ({
                 <DashLogo /> <span className={(title && title.length > 0) ? [classes.title, classes.titleText].join(' ') : classes.title}>{title}</span>
               </div>
               {
-                (date && date.length > 0 ) && (
+                (dateString && dateString.length > 0 ) && (
                   <div className={classes.titleBox}>
-                    <span className={classes.titleDate}>{date}</span>
+                    <span className={classes.titleDate}>{dateString}</span>
                   </div>
                 )
               }
@@ -113,9 +109,7 @@ const DashMenu = ({
           )}
 
           <div className={classes.calendar}>
-            <Calendar
-              getDate = {getDateString}
-            />
+            {calendar}
           </div>
         </Toolbar>
       </AppBar>
@@ -129,6 +123,7 @@ DashMenu.defaultProps = {
   // classes: PropTypes.string,
   // /** className that can access the top level element of this component */
   // className: PropTypes.string,
+  calendar: PropTypes.elementType
 };
 
 export default withStyles(styles)(DashMenu);
