@@ -24,6 +24,7 @@ const styles = {
     paddingBottom: "2px",
   },
 };
+const varianceColors = { high: "#12BF38", low: "#EF4A4A" };
 const LegendItem = ({ classes, color, data }) => {
   return (
     <div className={classes.legendContainer}>
@@ -35,7 +36,12 @@ const LegendItem = ({ classes, color, data }) => {
             ? (data.value / 1000).toFixed(1) + "k"
             : data.value}
         </div>
-        <Variance newValue={data.value} oldValue={data.oldValue} />
+        <Variance
+          newValue={data.value}
+          oldValue={data.oldValue}
+          highColor={varianceColors.high}
+          lowColor={varianceColors.low}
+        />
       </div>
     </div>
   );
