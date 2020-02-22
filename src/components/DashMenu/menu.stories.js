@@ -6,7 +6,7 @@ import * as brandImages from "../../resources/images/brands";
 import { cmExecDashConfig } from "../../config";
 import { SessionProvider } from "../../context";
 import CMCalendar from "../Calendar";
-import moment from 'moment';
+import moment from "moment";
 
 export default { title: "Dash Menu", component: DashMenu };
 
@@ -28,7 +28,7 @@ export const withDrawer = () => {
       ></DashMenu>
       <MenuDrawer state={[openDrawer, setOpenDrawer]}>
         {["Wired", "The New Yorker", "Vanity Fair"].map((item, i) => {
-          return <ListItem>{item}</ListItem>;
+          return <ListItem key={i}>{item}</ListItem>;
         })}
       </MenuDrawer>
     </SessionProvider>
@@ -38,7 +38,7 @@ export const withDrawer = () => {
 export const withCalendar = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [date, setDate] = useState(moment().format("MMM. DD, YYYY"));
-  const getDateString = (date) => {
+  const getDateString = date => {
     setDate(moment(date).format("MMM. DD, YYYY"));
   };
   return (
@@ -47,11 +47,11 @@ export const withCalendar = () => {
         className={"class-name"}
         state={[openDrawer, setOpenDrawer]}
         dateString={date}
-        calendar = {<CMCalendar getDate = {(getDateString)} />}
+        calendar={<CMCalendar getDate={getDateString} />}
       ></DashMenu>
       <MenuDrawer state={[openDrawer, setOpenDrawer]}>
         {["Wired", "The New Yorker", "Vanity Fair"].map((item, i) => {
-          return <ListItem>{item}</ListItem>;
+          return <ListItem key={i}>{item}</ListItem>;
         })}
       </MenuDrawer>
     </SessionProvider>

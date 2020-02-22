@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import withStyles from "react-jss";
 
 import Logo from "../../resources/images/DashLogo.png";
 
 const styles = {};
 
-const DashLogo = ({ classes, height }) => {
-  return <img height={height} src={Logo} />;
+const DashLogo = ({ classes }) => {
+  return <img className={classes} src={Logo} />;
 };
 
 DashLogo.defaultProps = {
