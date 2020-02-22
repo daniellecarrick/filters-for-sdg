@@ -22,10 +22,19 @@ export const socialConfig = {
   appname: "4e9cec7f-947b-455a-95c7-f14d83a993a5",
 };
 
+<<<<<<< HEAD
 export const affiliateConfig = {
   name: "Affiliate",
   host: "dash.condenast.com",
   isSecure: true,
   port: 443,
   appname: "81299c2f-3215-4b51-9508-05f30fed058b",
+=======
+export const cmExecDashConfig = {
+  name: "CM Exec Dashboard",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "26567b01-98b6-4228-9439-5514bd663ff7",
+>>>>>>> origin/develop
 };
