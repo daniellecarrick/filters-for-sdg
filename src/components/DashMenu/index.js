@@ -58,15 +58,14 @@ const DashMenu = ({
   children,
   title = "",
   state: [value, onChange] = [false, () => {}],
-  datePicker = "",
   dateString = "",
-  calendar,
+  calendar = "",
 }) => {
   const hasLogo = title.includes("png");
   const handleChange = () => {
     onChange(value ? false : true);
   };
-
+  console.log("calendar", calendar);
   return (
     <>
       <AppBar position="sticky" className={clsx(classes.root, className)}>
@@ -129,10 +128,9 @@ const DashMenu = ({
 };
 
 DashMenu.defaultProps = {
-  // /** Label above kpi */
-  // classes: PropTypes.string,
-  // /** className that can access the top level element of this component */
-  // className: PropTypes.string,
+  /** className that can access the top level element of this component */
+  className: PropTypes.string,
+  /** Pass a calendar component */
   calendar: PropTypes.elementType,
 };
 
