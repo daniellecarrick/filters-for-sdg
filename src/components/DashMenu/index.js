@@ -5,7 +5,6 @@ import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import DashLogo from "../DashLogo";
 import HamburgerIcon from "../../resources/images/hamburger.png";
-import CalendarIcon from "../../resources/images/calendar.png";
 
 const styles = {
   root: {
@@ -34,7 +33,6 @@ const styles = {
   title: {
     color: "black",
     fontSize: "12px",
-    //marginLeft: "10px",
     "@media screen and (max-width: 375px)": {
       maxWidth: "50px",
     },
@@ -57,15 +55,14 @@ const DashMenu = ({
   className,
   children,
   title = "",
-  state: [value, onChange] = [false, () => {}],
+  state: [value, onChange] = [false, () => { }],
   dateString = "",
-  calendar = "",
+  calendar = ""
 }) => {
   const hasLogo = title.includes("png");
   const handleChange = () => {
     onChange(value ? false : true);
   };
-  console.log("calendar", calendar);
   return (
     <>
       <AppBar position="sticky" className={clsx(classes.root, className)}>
@@ -98,26 +95,26 @@ const DashMenu = ({
               )}
             </div>
           ) : (
-            <div className={classes.titleContainer}>
-              <div className={classes.titleBox}>
-                <DashLogo />
-                <span
-                  className={
-                    title && title.length > 0
-                      ? [classes.title, classes.titleText].join(" ")
-                      : classes.title
-                  }
-                >
-                  {title}
-                </span>
-              </div>
-              {dateString && dateString.length > 0 && (
+              <div className={classes.titleContainer}>
                 <div className={classes.titleBox}>
-                  <span className={classes.titleDate}>{dateString}</span>
+                  <DashLogo />
+                  <span
+                    className={
+                      title && title.length > 0
+                        ? [classes.title, classes.titleText].join(" ")
+                        : classes.title
+                    }
+                  >
+                    {title}
+                  </span>
                 </div>
-              )}
-            </div>
-          )}
+                {dateString && dateString.length > 0 && (
+                  <div className={classes.titleBox}>
+                    <span className={classes.titleDate}>{dateString}</span>
+                  </div>
+                )}
+              </div>
+            )}
 
           <div className={classes.calendar}>{calendar}</div>
         </Toolbar>
@@ -129,9 +126,7 @@ const DashMenu = ({
 
 DashMenu.defaultProps = {
   /** className that can access the top level element of this component */
-  className: PropTypes.string,
-  /** Pass a calendar component */
-  calendar: PropTypes.elementType,
+  className: PropTypes.string
 };
 
 export default withStyles(styles)(DashMenu);

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import withStyles from "react-jss";
-import { Button, Grid, IconButton } from "@material-ui/core";
-import moment from "moment";
+import { IconButton } from "@material-ui/core";
 import MomentUtils from "@date-io/moment";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import CalendarIcon from "../../resources/images/calendar.png";
@@ -11,12 +9,7 @@ import CalendarIcon from "../../resources/images/calendar.png";
 const styles = {};
 
 const CalendarMenu = ({
-  theme,
-  size,
-  onClick,
-  className,
   classes,
-  children,
   getDate,
 }) => {
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -24,7 +17,7 @@ const CalendarMenu = ({
 
   const onChangeCalendar = date => {
     handleDateChange(date);
-    getDate(date);
+    getDate && getDate(date);
     setOpenPicker({
       openPicker: !openPicker,
     });
