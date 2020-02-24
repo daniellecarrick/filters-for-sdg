@@ -103,6 +103,7 @@ const componentStyles = {
     fontWeight: "normal",
     fontSize: "10px",
     color: "#C2C9D1",
+    marginBottom: "5px",
     cursor: "pointer",
     "&:hover": {
       color: "black",
@@ -114,7 +115,7 @@ const componentStyles = {
     fontWeight: "normal",
     fontSize: "10px",
     color: "#C2C9D1",
-    marginBottom: "5px",
+    marginBottom: "10px",
     cursor: "pointer",
     "&:hover": {
       color: "black",
