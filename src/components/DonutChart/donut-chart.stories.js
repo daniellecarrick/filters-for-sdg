@@ -40,5 +40,6 @@ export const basic = () => (
     innerRadius={60}
     colors={colors}
     legendData={legendData}
+    valueInDonut={false}
   />
 );

@@ -33,19 +33,29 @@ const styles = {
     textOverflow: "ellipsis",
   },
 };
+const formatNumber = (num, dollar) => {
+  var formattedNum = 0;
+  if (num < Math.pow(10, 3)) {
+    formattedNum = num.toFixed(1);
+  } else if (num < Math.pow(10, 6)) {
+    formattedNum = (num / Math.pow(10, 3)).toFixed(1) + "K";
+  } else if (num < Math.pow(10, 9)) {
+    formattedNum = (num / Math.pow(10, 6)).toFixed(1) + "M";
+  } else {
+    formattedNum = (num / Math.pow(10, 9)).toFixed(1) + "B";
+  }
+
+  if (dollar) {
+    return "$" + formattedNum;
+  } else return formattedNum;
+};
 const LegendItem = ({ classes, color, data }) => {
   return (
     <div className={classes.legendContainer}>
       <div className={classes.legendBlock} style={{ background: color }} />
       <div className={classes.legendTextContainer}>
         <div className={classes.type}>{data.type}</div>
-        <div className={classes.value}>
-          {data.value > 100000
-            ? (data.value / 1000000).toFixed(2) + "M"
-            : data.value > 1000
-            ? (data.value / 1000).toFixed(2) + "K"
-            : data.value}
-        </div>
+        <div className={classes.value}>{formatNumber(data.value)}</div>
         <div className={classes.variance}>
           <Variance newValue={data.value} oldValue={data.oldValue} />
         </div>

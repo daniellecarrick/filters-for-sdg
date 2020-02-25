@@ -7,7 +7,10 @@ import PropTypes from "prop-types";
 
 const style = {
   wholeContainer: {
-    margin: "5% 3% 5% 3%",
+    margin: "3% 2% 3% 2%",
+  },
+  lowMarginContainer: {
+    margin: "3% 0% 3% 0%",
   },
   contentContainer: {
     display: "flex",
@@ -27,6 +30,9 @@ const style = {
     fontWeight: 750,
     fontSize: "26px",
   },
+  hideLabel: {
+    display: "none",
+  },
   svgVar: {
     width: "100%",
     height: "160%",
@@ -42,6 +48,22 @@ const style = {
     fontSize: "26px",
   },
 };
+const formatNumber = (num, dollar) => {
+  var formattedNum = 0;
+  if (num < Math.pow(10, 3)) {
+    formattedNum = num.toFixed(1);
+  } else if (num < Math.pow(10, 6)) {
+    formattedNum = (num / Math.pow(10, 3)).toFixed(1) + "K";
+  } else if (num < Math.pow(10, 9)) {
+    formattedNum = (num / Math.pow(10, 6)).toFixed(1) + "M";
+  } else {
+    formattedNum = (num / Math.pow(10, 9)).toFixed(1) + "B";
+  }
+
+  if (dollar) {
+    return "$" + formattedNum;
+  } else return formattedNum;
+};
 
 const DonutChart = ({
   classes,
@@ -50,12 +72,17 @@ const DonutChart = ({
   data,
   legendData,
   colors,
+  valueInDonut,
 }) => {
   var pie = d3.pie().value(d => d.value)(data);
   var translate = `translate(130,130)`;
   var total = 0;
   return (
-    <div className={classes.wholeContainer}>
+    <div
+      className={
+        valueInDonut ? classes.wholeContainer : classes.lowMarginContainer
+      }
+    >
       <div className={classes.contentContainer}>
         <div className={classes.groupVar}>
           <svg className={classes.svgVar}>
@@ -75,12 +102,8 @@ const DonutChart = ({
               })}
             </g>
           </svg>
-          <div className={classes.label}>
-            {total > 100000
-              ? (total / 1000000).toFixed(2) + "M"
-              : total > 1000
-              ? (total / 1000).toFixed(2) + "K"
-              : total}
+          <div className={valueInDonut ? classes.label : classes.hideLabel}>
+            {formatNumber(total)}
           </div>
           <div className={classes.legendContainer}>
             {legendData.map((d, i) => {
@@ -111,5 +134,6 @@ DonutChart.defaultProps = {
   outerRadius: 90,
   innerRadius: 60,
   colors: ["#55B1F3", "#3A66BB", "#C4C4C4"],
+  valueInDonut: true,
 };
 export default withStyles(style)(DonutChart);
