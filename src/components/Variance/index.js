@@ -30,7 +30,7 @@ const styles = {
 calculates the variance percentage and returns a block with the % of variance. 
 If the variance is negative returns a red block and if the variance is positive 
 returns a green block */
-const Variance = ({ classes, newValue, oldValue }) => {
+const Variance = ({ classes, newValue, oldValue, highColor, lowColor }) => {
   const percentConvertor = newValue - oldValue > 0 ? 100 : -100;
   if (oldValue) {
     return (
@@ -38,8 +38,8 @@ const Variance = ({ classes, newValue, oldValue }) => {
         className={classes.varianceBlock}
         style={
           newValue - oldValue > 0
-            ? { background: "#12BF38" }
-            : { background: "#EF4A4A" }
+            ? { background: highColor }
+            : { background: lowColor }
         }
       >
         <img
@@ -59,5 +59,10 @@ Variance.propTypes = {
   newValue: PropTypes.number,
   /** Old value is a number that denotes the value to a comparitively older timescale [previous year/previous month/previous week]*/
   oldValue: PropTypes.number,
+};
+
+Variance.defaultProps = {
+  highColor: "#12BF38",
+  lowColor: "#EF4A4A",
 };
 export default withStyles(styles)(Variance);
