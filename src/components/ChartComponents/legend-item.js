@@ -48,7 +48,6 @@ const styles = {
     paddingBottom: "2px",
   },
 };
-<<<<<<< HEAD
 const formatNumber = (num, dollar, percentage, percentageValue) => {
   var formattedNum = 0;
   if (num < Math.pow(10, 3)) {
@@ -67,7 +66,7 @@ const formatNumber = (num, dollar, percentage, percentageValue) => {
     return percentageValue + "%";
   } else return formattedNum;
 };
-
+const varianceColors = { high: "#00568E", low: "#EF4A4A" };
 const LegendItem = ({
   classes,
   color,
@@ -77,10 +76,6 @@ const LegendItem = ({
   percentageValue,
   valueInDonut,
 }) => {
-=======
-const varianceColors = { high: "#12BF38", low: "#EF4A4A" };
-const LegendItem = ({ classes, color, data }) => {
->>>>>>> origin/variance-block
   return (
     <div className={classes.legendContainer}>
       <div className={classes.legendBlock} style={{ background: color }} />
@@ -94,15 +89,12 @@ const LegendItem = ({ classes, color, data }) => {
         <div className={classes.variance}>
           <Variance newValue={data.value} oldValue={data.oldValue} />
         </div>
-<<<<<<< HEAD
-=======
         <Variance
           newValue={data.value}
           oldValue={data.oldValue}
           highColor={varianceColors.high}
           lowColor={varianceColors.low}
         />
->>>>>>> origin/variance-block
       </div>
     </div>
   );
