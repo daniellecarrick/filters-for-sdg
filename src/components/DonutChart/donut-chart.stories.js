@@ -27,7 +27,7 @@ const legendData = [
   {
     type: "Direct",
     value: 4200,
-    oldValue: 1600,
+    oldValue: 8600,
     percentageValue: 76,
   },
   {
@@ -39,8 +39,8 @@ const legendData = [
 export const basic = () => (
   <DonutChart
     data={data}
-    outerRadius={90}
-    innerRadius={60}
+    outerRadius={40}
+    innerRadius={20}
     colors={colors}
     legendData={legendData}
   />

@@ -9,8 +9,7 @@ const styles = {
     margin: "10px 10px 10px 20px",
   },
   legendBlock: {
-    width: "10px",
-    height: "73px",
+    width: "8px",
   },
   legendTextContainer: {
     marginLeft: "10px",
@@ -33,9 +32,8 @@ const styles = {
     textOverflow: "ellipsis",
   },
   labelType: {
-    fontSize: "18px",
+    fontSize: "14px",
     paddingBottom: "2px",
-    fontWeight: 500,
     overflow: "hidden",
     whiteSpace: "nowrap",
     width: "120px",
@@ -66,35 +64,22 @@ const formatNumber = (num, dollar, percentage, percentageValue) => {
     return percentageValue + "%";
   } else return formattedNum;
 };
-const varianceColors = { high: "#00568E", low: "#EF4A4A" };
-const LegendItem = ({
-  classes,
-  color,
-  data,
-  dollar,
-  percentage,
-  percentageValue,
-  valueInDonut,
-}) => {
+const varianceColors = { high: "#126274", low: "#EF4A4A" };
+const LegendItem = ({ classes, color, data }) => {
   return (
     <div className={classes.legendContainer}>
       <div className={classes.legendBlock} style={{ background: color }} />
       <div className={classes.legendTextContainer}>
-        <div className={valueInDonut ? classes.percentageValue : classes.value}>
-          {formatNumber(data.value, dollar, percentage, percentageValue)}
-        </div>
-        <div className={valueInDonut ? classes.labelType : classes.type}>
-          {data.type}
-        </div>
+        <div className={classes.percentageValue}>{data.percentageValue}%</div>
+        <div className={classes.labelType}>{data.type}</div>
         <div className={classes.variance}>
-          <Variance newValue={data.value} oldValue={data.oldValue} />
+          <Variance
+            newValue={data.value}
+            oldValue={data.oldValue}
+            highColor={varianceColors.high}
+            lowColor={varianceColors.low}
+          />
         </div>
-        <Variance
-          newValue={data.value}
-          oldValue={data.oldValue}
-          highColor={varianceColors.high}
-          lowColor={varianceColors.low}
-        />
       </div>
     </div>
   );

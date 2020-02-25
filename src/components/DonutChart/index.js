@@ -6,10 +6,7 @@ import LegendItem from "../ChartComponents/legend-item";
 import PropTypes from "prop-types";
 
 const style = {
-  wholeContainer: { margin: "3% 2% 3% 2%" },
-  lowMarginContainer: {
-    margin: "3% 0% 3% 0%",
-  },
+  wholeContainer: { margin: "2%" },
   contentContainer: {
     display: "flex",
     flexDirection: "row",
@@ -18,8 +15,7 @@ const style = {
   groupVar: {
     position: "relative",
     display: "flex",
-    flexDirection: "row",
-    margin: "1%",
+    margin: "1% 0% 1% -12%",
   },
   label: {
     position: "absolute",
@@ -39,35 +35,17 @@ const style = {
   legendContainer: {
     flex: 1,
     position: "absolute",
-    left: "60%",
+    left: "45%",
   },
   lowMarginLegendContainer: {
     flex: 1,
     position: "absolute",
-    left: "45%",
+    left: "40%",
   },
   title: {
     fontWeight: 750,
     fontSize: "26px",
   },
-};
-const formatNumber = (num, dollar, percentage, percentageValue) => {
-  var formattedNum = 0;
-  if (num < Math.pow(10, 3)) {
-    formattedNum = num.toFixed(1);
-  } else if (num < Math.pow(10, 6)) {
-    formattedNum = (num / Math.pow(10, 3)).toFixed(1) + "K";
-  } else if (num < Math.pow(10, 9)) {
-    formattedNum = (num / Math.pow(10, 6)).toFixed(1) + "M";
-  } else {
-    formattedNum = (num / Math.pow(10, 9)).toFixed(1) + "B";
-  }
-
-  if (dollar) {
-    return "$" + formattedNum;
-  } else if (percentage) {
-    return percentageValue + "%";
-  } else return formattedNum;
 };
 
 const DonutChart = ({
@@ -78,7 +56,6 @@ const DonutChart = ({
   legendData,
   colors,
   valueInDonut,
-  percentage,
 }) => {
   var pie = d3.pie().value(d => d.value)(data);
   var translate = `translate(130,130)`;
@@ -108,24 +85,13 @@ const DonutChart = ({
               })}
             </g>
           </svg>
-          <div className={valueInDonut ? classes.label : classes.hideLabel}>
-            {formatNumber(total)}
-          </div>
-          <div
-            className={
-              valueInDonut
-                ? classes.legendContainer
-                : classes.lowMarginLegendContainer
-            }
-          >
+          <div className={classes.legendContainer}>
             {legendData.map((d, i) => {
               return (
                 <LegendItem
                   key={`legend-${i}`}
                   data={d}
                   color={colors[i]}
-                  percentage={percentage}
-                  percentageValue={d.percentageValue}
                   valueInDonut={valueInDonut}
                 />
               );
