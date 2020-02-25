@@ -6,9 +6,7 @@ import LegendItem from "../ChartComponents/legend-item";
 import PropTypes from "prop-types";
 
 const style = {
-  wholeContainer: {
-    margin: "3% 2% 3% 2%",
-  },
+  wholeContainer: { margin: "3% 2% 3% 2%" },
   lowMarginContainer: {
     margin: "3% 0% 3% 0%",
   },
@@ -43,12 +41,17 @@ const style = {
     position: "absolute",
     left: "60%",
   },
+  lowMarginLegendContainer: {
+    flex: 1,
+    position: "absolute",
+    left: "45%",
+  },
   title: {
     fontWeight: 750,
     fontSize: "26px",
   },
 };
-const formatNumber = (num, dollar) => {
+const formatNumber = (num, dollar, percentage, percentageValue) => {
   var formattedNum = 0;
   if (num < Math.pow(10, 3)) {
     formattedNum = num.toFixed(1);
@@ -62,6 +65,8 @@ const formatNumber = (num, dollar) => {
 
   if (dollar) {
     return "$" + formattedNum;
+  } else if (percentage) {
+    return percentageValue + "%";
   } else return formattedNum;
 };
 
@@ -73,6 +78,7 @@ const DonutChart = ({
   legendData,
   colors,
   valueInDonut,
+  percentage,
 }) => {
   var pie = d3.pie().value(d => d.value)(data);
   var translate = `translate(130,130)`;
@@ -105,10 +111,23 @@ const DonutChart = ({
           <div className={valueInDonut ? classes.label : classes.hideLabel}>
             {formatNumber(total)}
           </div>
-          <div className={classes.legendContainer}>
+          <div
+            className={
+              valueInDonut
+                ? classes.legendContainer
+                : classes.lowMarginLegendContainer
+            }
+          >
             {legendData.map((d, i) => {
               return (
-                <LegendItem key={`legend-${i}`} data={d} color={colors[i]} />
+                <LegendItem
+                  key={`legend-${i}`}
+                  data={d}
+                  color={colors[i]}
+                  percentage={percentage}
+                  percentageValue={d.percentageValue}
+                  valueInDonut={valueInDonut}
+                />
               );
             })}
           </div>
@@ -133,7 +152,7 @@ DonutChart.propTypes = {
 DonutChart.defaultProps = {
   outerRadius: 90,
   innerRadius: 60,
-  colors: ["#55B1F3", "#3A66BB", "#C4C4C4"],
+  colors: ["#FFA600", "#00568E", "#E0E0E0"],
   valueInDonut: true,
 };
 export default withStyles(style)(DonutChart);
