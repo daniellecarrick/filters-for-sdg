@@ -31,8 +31,6 @@ const MenuDrawer = ({
   children,
   state: [value, onChange] = [false, () => {}],
 }) => {
-  console.log("menu drawer value", value);
-
   const handleChange = () => {
     onChange(value ? false : true);
   };

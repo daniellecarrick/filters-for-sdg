@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import BrandSelector from ".";
 import { SessionProvider } from "../../context";
-import {
-  adOpsConfig,
-  consumerMarketingConfig,
-  socialConfig,
-} from "../../config";
+import { adOpsConfig, affiliateConfig, socialConfig } from "../../config";
 
 export default { title: "Brand Selector", component: BrandSelector };
 
@@ -40,18 +36,20 @@ export const singleSelect = () => {
 };
 
 export const mapping = () => (
-  <SessionProvider qlikConfig={socialConfig}>
+  <SessionProvider qlikConfig={affiliateConfig}>
     <div style={{ backgroundColor: "#343a40", display: "inline-block" }}>
       <BrandSelector
-        field="brand"
+        field="Brand"
         fieldMap={{
           Allure: "ALL",
           "Architectural Digest": "AD",
           "Ars Technica": "ARST",
           "Bon Appetit": "BA",
+          BRIDES: "BRDE",
           "CN Traveler": "CNT",
           Epicurious: "EPIC",
           Glamour: "GLAM",
+          "Golf Digest": "GFDG",
           GQ: "GQ",
           Pitchfork: "PTFK",
           Self: "SELF",

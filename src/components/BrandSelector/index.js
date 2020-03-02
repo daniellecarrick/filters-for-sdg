@@ -56,24 +56,24 @@ const BrandSelector = ({
   const [brandList, setBrandList] = useState([]);
   const selectBrand$ = useRef(new Subject()).current;
   useEffect(() => {
-    const fullBrandList = [
-      { code: "ALL" },
-      { code: "AD" },
-      { code: "ARST" },
-      { code: "BA" },
-      { code: "CNT" },
-      { code: "EPIC" },
-      { code: "GLAM" },
-      { code: "GQ" },
-      { code: "PTFK" },
-      { code: "SELF" },
-      { code: "VOGT" },
-      { code: "TNY" },
-      { code: "THEM" },
-      { code: "VF" },
-      { code: "VOG" },
-      { code: "WIRE" },
-    ];
+    // const fullBrandList = [
+    //   { code: "ALL" },
+    //   { code: "AD" },
+    //   { code: "ARST" },
+    //   { code: "BA" },
+    //   { code: "CNT" },
+    //   { code: "EPIC" },
+    //   { code: "GLAM" },
+    //   { code: "GQ" },
+    //   { code: "PTFK" },
+    //   { code: "SELF" },
+    //   { code: "VOGT" },
+    //   { code: "TNY" },
+    //   { code: "THEM" },
+    //   { code: "VF" },
+    //   { code: "VOG" },
+    //   { code: "WIRE" },
+    // ];
 
     const brandListObj$ = doc$.pipe(
       qAskReplayRetry("CreateSessionObject", {
@@ -109,6 +109,7 @@ const BrandSelector = ({
             } else return brand;
           });
           return mappedBrandList;
+
           // const existingBrands = mappedBrandList.map(brand => brand.code);
           // return fullBrandList
           //   .filter(brand => !existingBrands.includes(brand.code))
@@ -128,7 +129,6 @@ const BrandSelector = ({
         })
       )
       .subscribe(setBrandList);
-
     const selectionSub$ = selectBrand$
       .pipe(
         withLatestFrom(brandListObj$),
@@ -164,7 +164,6 @@ const BrandSelector = ({
       selectionSub$.unsubscribe();
     };
   }, [doc$, selectBrand$, field]);
-  console.log(brandList);
 
   return (
     <div className={classNames(classes.brandDropdown__container, className)}>

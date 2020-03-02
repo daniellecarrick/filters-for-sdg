@@ -2,7 +2,14 @@ import {
   adOpsConfig,
   consumerMarketingConfig,
   socialConfig,
+  affiliateConfig,
   cmExecDashConfig,
 } from "./qlik-config";
 
-export { adOpsConfig, consumerMarketingConfig, socialConfig, cmExecDashConfig };
+export {
+  adOpsConfig,
+  affiliateConfig,
+  consumerMarketingConfig,
+  socialConfig,
+  cmExecDashConfig,
+};
