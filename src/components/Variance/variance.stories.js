@@ -10,6 +10,6 @@ export const negative = () => (
 
 export const positive = () => (
   <>
-    <Variance newValue={8800} oldValue={6000} />
+    <Variance newValue={8800} oldValue={6000} highColor={"#126274"} />
   </>
 );
