@@ -59,6 +59,10 @@ Variance.propTypes = {
   newValue: PropTypes.number,
   /** Old value is a number that denotes the value to a comparitively older timescale [previous year/previous month/previous week]*/
   oldValue: PropTypes.number,
+  /** High Color is a string that denotes the color of the indicator pill when the variance is high */
+  highColor: PropTypes.string,
+  /** Low Color is a string that denotes the color of the indicator pill when the variance is low */
+  lowColor: PropTypes.string,
 };
 
 Variance.defaultProps = {
