@@ -61,11 +61,7 @@ const DonutChart = ({
   var translate = `translate(130,130)`;
   var total = 0;
   return (
-    <div
-      className={
-        valueInDonut ? classes.wholeContainer : classes.lowMarginContainer
-      }
-    >
+    <div className={classes.wholeContainer}>
       <div className={classes.contentContainer}>
         <div className={classes.groupVar}>
           <svg className={classes.svgVar}>
