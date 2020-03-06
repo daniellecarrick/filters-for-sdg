@@ -17,6 +17,7 @@ const styles = {
   card: {
     display: "flex",
     justifyContent: "space-evenly",
+    fontFamily: "Rubik",
   },
 };
 
