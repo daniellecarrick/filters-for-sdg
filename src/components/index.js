@@ -3,6 +3,7 @@ export { default as BrandDropdown } from "./BrandDropdown";
 export { default as BrandSelector } from "./BrandSelector";
 export { default as Button } from "./Button";
 export { default as ButtonGroup } from "./ButtonGroup";
+export { default as Card } from "./Card";
 export { default as ClearButton } from "./ClearButton";
 export { default as CurrentSelections } from "./CurrentSelections";
 export { default as DownloadButton } from "./DownloadButton";
