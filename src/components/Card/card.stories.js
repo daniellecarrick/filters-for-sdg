@@ -1,16 +1,14 @@
 import React from "react";
 import Card from ".";
-import { Variance } from "..";
-import * as brands from "../../resources/images/brands";
+export default { title: "Card", component: Card };
 
-export default { title: "Exec Dash Card", component: Card };
+export const border = () => (
+  <Card border={true}>Example of a card with a border :-)</Card>
+);
 
-export const basic = () => <Card>Put some stuff in the card</Card>;
-
-export const kpiExample = () => (
-  <Card>
-    <img src={brands["WIREBLACK"]} />
-    <Variance oldValue={100} newValue={90} />
-    <Variance oldValue={90} newValue={100} />
+export const noBorder = () => (
+  <Card border={false}>
+    Example of card with no border which should be used for non-clickable
+    elements
   </Card>
 );
