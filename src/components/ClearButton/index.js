@@ -22,11 +22,7 @@ const ClearButton = ({ onClear, className, classes }) => {
   const clear$ = useRef(new Subject()).current;
   useEffect(() => {
     const sub$ = clear$
-      .pipe(
-        withLatestFrom(doc$),
-        pluck(1),
-        qAskReplayRetry("ClearAll")
-      )
+      .pipe(withLatestFrom(doc$), pluck(1), qAskReplayRetry("ClearAll"))
       .subscribe(() => onClear());
 
     return () => sub$.unsubscribe();
