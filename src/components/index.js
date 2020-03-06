@@ -13,3 +13,4 @@ export { default as QdtComponent } from "./QdtComponent";
 export { default as QlikFilter } from "./QlikFilter";
 export { default as Switch } from "./Switch";
 export { default as Tile } from "./Tile";
+export { default as Variance } from "./Variance";
