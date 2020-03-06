@@ -1,18 +1,24 @@
-import { React, useState, useEffect } from "react";
-// import PropTypes from 'prop-types';
+import React from "react";
 import withStyles from "react-jss";
-import {
-  VictoryBar,
-  VictoryChart,
-  VictoryAxis,
-  VictoryScatter,
-  VictoryTooltip,
-} from "victory";
+import * as d3 from "d3";
 
 const styles = {
-  customTooltip: {
-    fontFamily: "Rubik",
-    color: "black",
+  numberLabel: {
+    fontSize: "12px",
+    fill: "black",
+    fontWeight: 500,
+  },
+  variance: {
+    fontSize: "12px",
+    fill: "#EF4A4A",
+    fontWeight: 600,
+    textAnchor: "end",
+  },
+  brandName: {
+    fontFamily: "Rubik, sans-serif",
+    fontSize: "12px",
+    fill: "#4a4a4a",
+    textAnchor: "end",
   },
 };
 
@@ -25,8 +31,7 @@ const data = [
   {
     brand: "Wired",
     goal: 94568726,
-    // timeSpent: 122029256
-    timeSpent: 44568726,
+    timeSpent: 122029256,
   },
   {
     brand: "Vanity Fair",
@@ -40,7 +45,7 @@ const data = [
   },
   {
     brand: "Glamour",
-    goal: 42090408,
+    goal: 59090408,
     timeSpent: 56800805,
   },
   {
@@ -59,7 +64,7 @@ const data = [
     timeSpent: 78281229,
   },
   {
-    brand: "Architectural Digest",
+    brand: "Arch Digest",
     goal: 18126918,
     timeSpent: 27365902,
   },
@@ -75,7 +80,7 @@ const data = [
   },
   {
     brand: "CN Traveler",
-    goal: 25918960,
+    goal: 55918960,
     timeSpent: 40869596,
   },
   {
@@ -90,71 +95,68 @@ const data = [
   },
 ];
 
-const dataLabel = data.map(d => {
-  var o = Object.assign({}, d);
-  o.label =
-    o.brand + "\n" + "Time Spent: " + o.timeSpent + "\n" + "Goal: " + o.goal;
-  return o;
-});
+const BarChart = ({ classes, width, dimensions }) => {
+  const timeSpent = data.map(d => d.timeSpent);
+  const dataMax = Math.max(...timeSpent);
 
-const Victory = () => {
+  console.log(dataMax);
+
+  var x = d3
+    .scaleLinear()
+    .domain([0, dataMax])
+    .range([0, dimensions.boundedWidth - dimensions.marginLeft]);
+
+  const f = d3.format(".2s");
+
+  //set up margins and responsiveness a la Wattenberger
+  console.log(dimensions);
   return (
-    <VictoryChart horizontal height={300} standalone={false}>
-      <VictoryAxis
-        crossAxis
-        // padding={40}
-        style={{
-          tickLabels: {
-            fontSize: 5,
-            // angle: 45,
-            // marginRight: "20px",
-            fontFamily: "Rubik",
-            fill: "#C4C4C4",
-            textAnchor: "end",
-            // verticalAnchor: "middle"
-          },
-          axis: {
-            stroke: "#c4c4c4",
-          },
-        }}
-      />
-      <VictoryAxis
-        dependentAxis
-        style={{
-          tickLabels: {
-            fontSize: 6,
-            fontFamily: "Rubik",
-          },
-          axis: {
-            stroke: "#fff",
-          },
-        }}
-      />
-      <VictoryBar
-        data={data}
-        style={{
-          data: {
-            fill: ({ datum }) =>
-              datum.timeSpent < datum.goal ? "#FF6361" : "#00205C",
-          },
-          labels: { fontSize: 10 },
-        }}
-        x={"brand"}
-        y={"timeSpent"}
-        cornerRadius={2}
-        width={"50px"}
-        labels={() => ""}
-      />
-      } />
-      <VictoryScatter
-        data={data}
-        x={"brand"}
-        y={"goal"}
-        size={2}
-        style={{ data: { fill: "#FFA600" } }}
-      />
-    </VictoryChart>
+    <div className={classes.BarChart}>
+      <svg width={dimensions.width} height={1000}>
+        {data.map((d, i) => {
+          return (
+            <g>
+              <text
+                className={classes.brandName}
+                x={dimensions.marginLeft - 10}
+                y={i * 30 + 10}
+              >
+                {d.brand}
+              </text>
+              <rect
+                width={x(d.timeSpent)}
+                height={"13px"}
+                fill={d.goal > d.timeSpent ? "#EF4A4A" : "#00205C"}
+                x={dimensions.marginLeft}
+                y={i * 30}
+                rx={3}
+              />
+              <circle
+                fill={d.goal > d.timeSpent ? "#4a4a4a" : "#f2f2f2"}
+                cx={x(d.goal) + dimensions.marginLeft}
+                cy={i * 30 + 6.5}
+                r={4}
+              />
+              <text
+                className={classes.numberLabel}
+                x={dimensions.boundedWidth + 10}
+                y={i * 30 + 10}
+              >
+                {f(d.timeSpent)}
+              </text>
+              <text
+                className={classes.variance}
+                x={dimensions.boundedWidth + 90}
+                y={i * 30 + 10}
+              >
+                {"XX%"}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 };
 
-export default withStyles(styles)(Victory);
+export default withStyles(styles)(BarChart);
