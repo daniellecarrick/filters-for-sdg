@@ -30,11 +30,11 @@ const BarChart = ({
   varianceAccessor2,
   variance = true,
   label,
-  value,
+  barValue,
   benchmark,
 }) => {
-  const timeSpent = data.map(d => d.timeSpent);
-  const dataMax = Math.max(...timeSpent);
+  const barSize = data.map(barValue);
+  const dataMax = Math.max(...barSize);
 
   var x = d3
     .scaleLinear()
@@ -42,6 +42,7 @@ const BarChart = ({
     .range([0, dimensions.boundedWidth - dimensions.marginLeft]);
 
   const f = d3.format(".2s");
+  const fMoney = d3.format("$.2s");
 
   return (
     <div className={classes.BarChart}>
@@ -57,15 +58,15 @@ const BarChart = ({
                 {label(d)}
               </text>
               <rect
-                width={x(value(d))}
+                width={x(barValue(d))}
                 height={"15px"}
-                fill={benchmark(d) > value(d) ? "#EF4A4A" : "#126274"}
+                fill={benchmark(d) > barValue(d) ? "#EF4A4A" : "#126274"}
                 x={dimensions.marginLeft}
                 y={i * 30}
                 rx={3}
               />
               <circle
-                fill={benchmark(d) > value(d) ? "#4a4a4a" : "#f2f2f2"}
+                fill={benchmark(d) > barValue(d) ? "#4a4a4a" : "#f2f2f2"}
                 cx={x(benchmark(d)) + dimensions.marginLeft}
                 cy={i * 30 + 7.5}
                 r={3}
@@ -75,7 +76,7 @@ const BarChart = ({
                 x={dimensions.boundedWidth + 10}
                 y={i * 30 + 12}
               >
-                {f(value(d))}
+                {f(barValue(d))}
               </text>
               {variance ? (
                 <foreignObject
@@ -91,7 +92,11 @@ const BarChart = ({
                   />
                 </foreignObject>
               ) : (
-                <text>{`${varianceAccessor1(d)}`}</text>
+                <text
+                  className={classes.valueLabel}
+                  x={dimensions.boundedWidth + 60}
+                  y={i * 30 + 12}
+                >{`${f(benchmark(d))}`}</text>
               )}
             </g>
           );
