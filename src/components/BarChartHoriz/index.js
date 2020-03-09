@@ -14,6 +14,7 @@ const styles = {
     fill: "#EF4A4A",
     fontWeight: 600,
     textAnchor: "end",
+    // width: "50px",
   },
   brandName: {
     fontFamily: "Rubik, sans-serif",
@@ -123,7 +124,7 @@ const BarChart = ({ classes, width, dimensions }) => {
               <rect
                 width={x(d.timeSpent)}
                 height={"13px"}
-                fill={d.goal > d.timeSpent ? "#EF4A4A" : "#00205C"}
+                fill={d.goal > d.timeSpent ? "#EF4A4A" : "#126274"}
                 x={dimensions.marginLeft}
                 y={i * 30}
                 rx={3}
@@ -147,7 +148,12 @@ const BarChart = ({ classes, width, dimensions }) => {
                 width={80}
                 height={25}
               >
-                X<Variance newValue={data.timeSpent} oldValue={data.goal} />
+                <Variance
+                  className={classes.variance}
+                  newValue={d.timeSpent}
+                  oldValue={d.goal}
+                  highColor={"#126274"}
+                />
               </foreignObject>
             </g>
           );

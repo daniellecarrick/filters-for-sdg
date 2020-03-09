@@ -4,23 +4,26 @@ import withStyles from "react-jss";
 import downArrow from "../../resources/images/down-arrow.png";
 import upArrow from "../../resources/images/up-arrow.png";
 import { PropTypes } from "prop-types";
+import classNames from "classnames";
 
 const styles = {
   varianceBlock: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
     borderRadius: "3px",
-    paddingBottom: "2px",
+    // paddingBottom: "2px",
     width: "80px",
+    height: "20px",
   },
   image: {
-    height: "10px",
-    width: "10px",
+    height: "8px",
+    width: "8px",
     padding: "7px",
   },
   variancePercent: {
-    fontSize: "15px",
-    fontWeight: "700",
+    fontSize: "12px",
+    fontWeight: "500",
     color: "white",
     padding: "3px",
   },
@@ -33,12 +36,19 @@ const styles = {
 calculates the variance percentage and returns a block with the % of variance. 
 If the variance is negative returns a red block and if the variance is positive 
 returns a green block */
-const Variance = ({ classes, newValue, oldValue, highColor, lowColor }) => {
+const Variance = ({
+  classes,
+  className,
+  newValue,
+  oldValue,
+  highColor,
+  lowColor,
+}) => {
   const percentConvertor = newValue - oldValue > 0 ? 100 : -100;
   if (oldValue) {
     return (
       <div
-        className={classes.varianceBlock}
+        className={classNames(classes.varianceBlock, className)}
         style={
           newValue - oldValue > 0
             ? { background: highColor }
