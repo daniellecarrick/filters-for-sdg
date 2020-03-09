@@ -26,11 +26,14 @@ const styles = {
   },
 };
 
+// default colorUp: "#12BF38"
+// default colorDown: "#EF4A4A"
+
 /* takes in two values new and old as numbers compares the two and 
 calculates the variance percentage and returns a block with the % of variance. 
 If the variance is negative returns a red block and if the variance is positive 
 returns a green block */
-const Variance = ({ classes, newValue, oldValue }) => {
+const Variance = ({ classes, newValue, oldValue, colorUp, colorDown }) => {
   const percentConvertor = newValue - oldValue > 0 ? 100 : -100;
   if (oldValue) {
     return (
@@ -38,8 +41,8 @@ const Variance = ({ classes, newValue, oldValue }) => {
         className={classes.varianceBlock}
         style={
           newValue - oldValue > 0
-            ? { background: "#12BF38" }
-            : { background: "#EF4A4A" }
+            ? { background: colorUp }
+            : { background: colorDown }
         }
       >
         <img

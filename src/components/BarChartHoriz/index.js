@@ -1,6 +1,7 @@
 import React from "react";
 import withStyles from "react-jss";
 import * as d3 from "d3";
+import Variance from "../Variance/index";
 
 const styles = {
   numberLabel: {
@@ -99,8 +100,6 @@ const BarChart = ({ classes, width, dimensions }) => {
   const timeSpent = data.map(d => d.timeSpent);
   const dataMax = Math.max(...timeSpent);
 
-  console.log(dataMax);
-
   var x = d3
     .scaleLinear()
     .domain([0, dataMax])
@@ -108,8 +107,6 @@ const BarChart = ({ classes, width, dimensions }) => {
 
   const f = d3.format(".2s");
 
-  //set up margins and responsiveness a la Wattenberger
-  console.log(dimensions);
   return (
     <div className={classes.BarChart}>
       <svg width={dimensions.width} height={1000}>
@@ -135,7 +132,7 @@ const BarChart = ({ classes, width, dimensions }) => {
                 fill={d.goal > d.timeSpent ? "#4a4a4a" : "#f2f2f2"}
                 cx={x(d.goal) + dimensions.marginLeft}
                 cy={i * 30 + 6.5}
-                r={4}
+                r={3}
               />
               <text
                 className={classes.numberLabel}
@@ -144,17 +141,19 @@ const BarChart = ({ classes, width, dimensions }) => {
               >
                 {f(d.timeSpent)}
               </text>
-              <text
-                className={classes.variance}
+              <foreignObject
                 x={dimensions.boundedWidth + 90}
-                y={i * 30 + 10}
+                y={i * 30}
+                width={80}
+                height={25}
               >
-                {"XX%"}
-              </text>
+                X<Variance newValue={data.timeSpent} oldValue={data.goal} />
+              </foreignObject>
             </g>
           );
         })}
       </svg>
+      <Variance newValue={500} oldValue={300} />
     </div>
   );
 };
