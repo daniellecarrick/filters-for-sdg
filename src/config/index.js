@@ -9,11 +9,8 @@ import {
 
 export {
   adOpsConfig,
-  consumerMarketingConfig,
-  socialConfig,
   affiliateConfig,
   cneConfig,
-  affiliateConfig,
   consumerMarketingConfig,
   socialConfig,
   cmExecDashConfig,
