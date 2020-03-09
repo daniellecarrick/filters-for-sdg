@@ -4,6 +4,7 @@ import {
   socialConfig,
   affiliateConfig,
   cneConfig,
+  cmExecDashConfig,
 } from "./qlik-config";
 
 export {
@@ -12,4 +13,8 @@ export {
   socialConfig,
   affiliateConfig,
   cneConfig,
+  affiliateConfig,
+  consumerMarketingConfig,
+  socialConfig,
+  cmExecDashConfig,
 };
