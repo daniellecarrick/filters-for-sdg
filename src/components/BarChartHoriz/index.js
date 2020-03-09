@@ -4,17 +4,15 @@ import * as d3 from "d3";
 import Variance from "../Variance/index";
 
 const styles = {
-  numberLabel: {
-    fontSize: "12px",
+  valueLabel: {
+    fontSize: "13px",
     fill: "black",
     fontWeight: 500,
   },
   variance: {
-    fontSize: "12px",
-    fill: "#EF4A4A",
     fontWeight: 600,
     textAnchor: "end",
-    // width: "50px",
+    width: "60px",
   },
   brandName: {
     fontFamily: "Rubik, sans-serif",
@@ -24,80 +22,17 @@ const styles = {
   },
 };
 
-const data = [
-  {
-    brand: "The New Yorker",
-    goal: 180071014,
-    timeSpent: 208366158,
-  },
-  {
-    brand: "Wired",
-    goal: 94568726,
-    timeSpent: 122029256,
-  },
-  {
-    brand: "Vanity Fair",
-    goal: 88277387,
-    timeSpent: 116791302,
-  },
-  {
-    brand: "Teen Vogue",
-    goal: 23771643,
-    timeSpent: 31491036,
-  },
-  {
-    brand: "Glamour",
-    goal: 59090408,
-    timeSpent: 56800805,
-  },
-  {
-    brand: "Vogue",
-    goal: 61136100,
-    timeSpent: 83705322,
-  },
-  {
-    brand: "Allure",
-    goal: 44253466,
-    timeSpent: 66010598,
-  },
-  {
-    brand: "GQ",
-    goal: 51855524,
-    timeSpent: 78281229,
-  },
-  {
-    brand: "Arch Digest",
-    goal: 18126918,
-    timeSpent: 27365902,
-  },
-  {
-    brand: "Pitchfork",
-    goal: 50797245,
-    timeSpent: 77289997,
-  },
-  {
-    brand: "Self",
-    goal: 49500320,
-    timeSpent: 76554197,
-  },
-  {
-    brand: "CN Traveler",
-    goal: 55918960,
-    timeSpent: 40869596,
-  },
-  {
-    brand: "Bon Appetit",
-    goal: 74403536,
-    timeSpent: 126443929,
-  },
-  {
-    brand: "Epicurious",
-    goal: 48162400,
-    timeSpent: 93621041,
-  },
-];
-
-const BarChart = ({ classes, width, dimensions }) => {
+const BarChart = ({
+  classes,
+  dimensions,
+  data,
+  varianceAccessor1,
+  varianceAccessor2,
+  variance = true,
+  label,
+  value,
+  benchmark,
+}) => {
   const timeSpent = data.map(d => d.timeSpent);
   const dataMax = Math.max(...timeSpent);
 
@@ -110,56 +45,58 @@ const BarChart = ({ classes, width, dimensions }) => {
 
   return (
     <div className={classes.BarChart}>
-      <svg width={dimensions.width} height={1000}>
+      <svg width={dimensions.width} height={700}>
         {data.map((d, i) => {
           return (
             <g>
               <text
                 className={classes.brandName}
                 x={dimensions.marginLeft - 10}
-                y={i * 30 + 10}
+                y={i * 30 + 12}
               >
-                {d.brand}
+                {label(d)}
               </text>
               <rect
-                width={x(d.timeSpent)}
-                height={"13px"}
-                fill={d.goal > d.timeSpent ? "#EF4A4A" : "#126274"}
+                width={x(value(d))}
+                height={"15px"}
+                fill={benchmark(d) > value(d) ? "#EF4A4A" : "#126274"}
                 x={dimensions.marginLeft}
                 y={i * 30}
                 rx={3}
               />
               <circle
-                fill={d.goal > d.timeSpent ? "#4a4a4a" : "#f2f2f2"}
-                cx={x(d.goal) + dimensions.marginLeft}
-                cy={i * 30 + 6.5}
+                fill={benchmark(d) > value(d) ? "#4a4a4a" : "#f2f2f2"}
+                cx={x(benchmark(d)) + dimensions.marginLeft}
+                cy={i * 30 + 7.5}
                 r={3}
               />
               <text
-                className={classes.numberLabel}
+                className={classes.valueLabel}
                 x={dimensions.boundedWidth + 10}
-                y={i * 30 + 10}
+                y={i * 30 + 12}
               >
-                {f(d.timeSpent)}
+                {f(value(d))}
               </text>
-              <foreignObject
-                x={dimensions.boundedWidth + 90}
-                y={i * 30}
-                width={80}
-                height={25}
-              >
-                <Variance
-                  className={classes.variance}
-                  newValue={d.timeSpent}
-                  oldValue={d.goal}
-                  highColor={"#126274"}
-                />
-              </foreignObject>
+              {variance ? (
+                <foreignObject
+                  x={dimensions.boundedWidth + 50}
+                  y={i * 30}
+                  width={80}
+                  height={16}
+                >
+                  <Variance
+                    newValue={varianceAccessor1(d)}
+                    oldValue={varianceAccessor2(d)}
+                    highColor={"#126274"}
+                  />
+                </foreignObject>
+              ) : (
+                <text>{`${varianceAccessor1(d)}`}</text>
+              )}
             </g>
           );
         })}
       </svg>
-      <Variance newValue={500} oldValue={300} />
     </div>
   );
 };

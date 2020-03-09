@@ -13,13 +13,13 @@ const styles = {
     alignItems: "center",
     borderRadius: "3px",
     // paddingBottom: "2px",
-    width: "80px",
-    height: "20px",
+    width: "60px",
+    height: "16px",
   },
   image: {
     height: "8px",
     width: "8px",
-    padding: "7px",
+    padding: "7px 2px 7px 7px",
   },
   variancePercent: {
     fontSize: "12px",
