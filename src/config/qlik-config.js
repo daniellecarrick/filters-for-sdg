@@ -30,6 +30,14 @@ export const affiliateConfig = {
   appname: "81299c2f-3215-4b51-9508-05f30fed058b",
 };
 
+export const cneConfig = {
+  name: "CNE Executive Dashboard",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "a9622f12-57bf-4543-a0c3-df65fcaa9ab0",
+};
+
 export const cmExecDashConfig = {
   name: "CM Exec Dashboard",
   host: "dash.condenast.com",
