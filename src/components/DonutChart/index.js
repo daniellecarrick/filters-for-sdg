@@ -28,14 +28,13 @@ const style = {
     display: "none",
   },
   svgVar: {
-    width: "100%",
     height: "160%",
-    marginLeft: "-10%",
+    marginLeft: "30%",
   },
   legendContainer: {
     flex: 1,
     position: "absolute",
-    left: "45%",
+    left: "90%",
   },
   lowMarginLegendContainer: {
     flex: 1,
@@ -83,7 +82,12 @@ const DonutChart = ({
           <div className={classes.legendContainer}>
             {legendData.map((d, i) => {
               return (
-                <LegendItem key={`legend-${i}`} data={d} color={colors[i]} />
+                <LegendItem
+                  key={`legend-${i}`}
+                  data={d}
+                  color={colors[i]}
+                  percentageValue={d.percentageValue}
+                />
               );
             })}
           </div>

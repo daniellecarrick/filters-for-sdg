@@ -46,31 +46,34 @@ const styles = {
     paddingBottom: "2px",
   },
 };
-const formatNumber = (num, dollar, percentage, percentageValue) => {
+const formatNumber = (num, dollar, percentageValue) => {
   var formattedNum = 0;
-  if (num < Math.pow(10, 3)) {
-    formattedNum = num.toFixed(1);
-  } else if (num < Math.pow(10, 6)) {
-    formattedNum = (num / Math.pow(10, 3)).toFixed(1) + "K";
-  } else if (num < Math.pow(10, 9)) {
-    formattedNum = (num / Math.pow(10, 6)).toFixed(1) + "M";
-  } else {
-    formattedNum = (num / Math.pow(10, 9)).toFixed(1) + "B";
-  }
-
-  if (dollar) {
-    return "$" + formattedNum;
-  } else if (percentage) {
+  if (percentageValue) {
     return percentageValue + "%";
-  } else return formattedNum;
+  } else {
+    if (num < Math.pow(10, 3)) {
+      formattedNum = num.toFixed(1);
+    } else if (num < Math.pow(10, 6)) {
+      formattedNum = (num / Math.pow(10, 3)).toFixed(1) + "K";
+    } else if (num < Math.pow(10, 9)) {
+      formattedNum = (num / Math.pow(10, 6)).toFixed(1) + "M";
+    } else {
+      formattedNum = (num / Math.pow(10, 9)).toFixed(1) + "B";
+    }
+    if (dollar) {
+      return "$" + formattedNum;
+    } else return formattedNum;
+  }
 };
 const varianceColors = { high: "#126274", low: "#EF4A4A" };
-const LegendItem = ({ classes, color, data }) => {
+const LegendItem = ({ classes, color, data, dollar, percentageValue }) => {
   return (
     <div className={classes.legendContainer}>
       <div className={classes.legendBlock} style={{ background: color }} />
       <div className={classes.legendTextContainer}>
-        <div className={classes.percentageValue}>{data.percentageValue}%</div>
+        <div className={classes.percentageValue}>
+          {formatNumber(data, dollar, percentageValue)}
+        </div>
         <div className={classes.labelType}>{data.type}</div>
         <div className={classes.variance}>
           <Variance
@@ -87,6 +90,6 @@ const LegendItem = ({ classes, color, data }) => {
 
 LegendItem.defaultProps = {
   dollar: false,
-  percentage: false,
+  percentageValue: null,
 };
 export default withStyles(styles)(LegendItem);
