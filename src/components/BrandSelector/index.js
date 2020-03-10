@@ -39,8 +39,6 @@ const styles = {
   brandDropdown__input_selected: { opacity: 1 },
 };
 
-console.log("brand images", brandImages);
-
 const BrandSelector = ({
   field,
   fieldMap,
@@ -111,6 +109,7 @@ const BrandSelector = ({
             } else return brand;
           });
           return mappedBrandList;
+
           // const existingBrands = mappedBrandList.map(brand => brand.code);
           // return fullBrandList
           //   .filter(brand => !existingBrands.includes(brand.code))
@@ -130,7 +129,6 @@ const BrandSelector = ({
         })
       )
       .subscribe(setBrandList);
-
     const selectionSub$ = selectBrand$
       .pipe(
         withLatestFrom(brandListObj$),
@@ -166,7 +164,6 @@ const BrandSelector = ({
       selectionSub$.unsubscribe();
     };
   }, [doc$, selectBrand$, field]);
-  console.log(brandList);
 
   return (
     <div className={classNames(classes.brandDropdown__container, className)}>

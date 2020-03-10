@@ -28,4 +28,23 @@ export const affiliateConfig = {
   isSecure: true,
   port: 443,
   appname: "81299c2f-3215-4b51-9508-05f30fed058b",
+<<<<<<< HEAD
+=======
+};
+
+export const cneConfig = {
+  name: "CNE Executive Dashboard",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "a9622f12-57bf-4543-a0c3-df65fcaa9ab0",
+};
+
+export const cmExecDashConfig = {
+  name: "CM Exec Dashboard",
+  host: "dash.condenast.com",
+  isSecure: true,
+  port: 443,
+  appname: "26567b01-98b6-4228-9439-5514bd663ff7",
+>>>>>>> origin/master
 };

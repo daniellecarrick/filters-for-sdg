@@ -4,12 +4,12 @@ export default { title: "Variance", component: Variance };
 
 export const negative = () => (
   <>
-    <Variance newValue={4800} oldValue={6000} />
+    <Variance newValue={4800} oldValue={6000} lowColor={"#EF4A4A"} />
   </>
 );
 
 export const positive = () => (
   <>
-    <Variance newValue={8800} oldValue={6000} />
+    <Variance newValue={8800} oldValue={6000} highColor={"#126274"} />
   </>
 );

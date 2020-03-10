@@ -5,6 +5,7 @@ import { Button } from "../";
 import classNames from "classnames";
 import { BehaviorSubject, fromEvent } from "rxjs";
 import { map, withLatestFrom, filter } from "rxjs/operators";
+import dropdown from "../../resources/images/dropdown.png";
 
 const styles = {
   dropdown: { position: "relative", height: "100%" },
@@ -17,6 +18,7 @@ const styles = {
     zIndex: 10,
   },
   dropdownContainer_hidden: { display: "none" },
+  brandDropdown__dropdown_icon: { marginLeft: "6px", width: "10px" },
 };
 
 const Dropdown = ({
@@ -75,8 +77,11 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
-  DropdownButton: ({ onClick, children = "Dropdown" }) => (
-    <Button onClick={onClick}>{children}</Button>
+  DropdownButton: ({ onClick, children = "Dropdown", classes }) => (
+    <Button onClick={onClick}>
+      {children}{" "}
+      <img className={classes.brandDropdown__dropdown_icon} src={dropdown} />{" "}
+    </Button>
   ),
 };
 
