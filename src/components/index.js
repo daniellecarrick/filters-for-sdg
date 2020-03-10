@@ -7,6 +7,7 @@ export { default as Card } from "./Card";
 export { default as ClearButton } from "./ClearButton";
 export { default as CurrentSelections } from "./CurrentSelections";
 export { default as DashLogo } from "./DashLogo";
+export { default as DonutChart } from "./DonutChart";
 export { default as DownloadButton } from "./DownloadButton";
 export { default as Dropdown } from "./Dropdown";
 export { default as Kpi } from "./Kpi";

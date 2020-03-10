@@ -6,9 +6,7 @@ import LegendItem from "../ChartComponents/legend-item";
 import PropTypes from "prop-types";
 
 const style = {
-  wholeContainer: {
-    margin: "2% 0 0 2%",
-  },
+  wholeContainer: { margin: "2%" },
   contentContainer: {
     display: "flex",
     flexDirection: "row",
@@ -17,8 +15,7 @@ const style = {
   groupVar: {
     position: "relative",
     display: "flex",
-    flexDirection: "row",
-    margin: "1%",
+    margin: "1% 0% 1% -12%",
   },
   label: {
     position: "absolute",
@@ -27,14 +24,22 @@ const style = {
     fontWeight: 750,
     fontSize: "26px",
   },
+  hideLabel: {
+    display: "none",
+  },
   svgVar: {
-    width: "100%",
     height: "160%",
-    marginLeft: "-10%",
+    marginLeft: "30%",
   },
   legendContainer: {
+    flex: 1,
     position: "absolute",
-    left: "60%",
+    left: "90%",
+  },
+  lowMarginLegendContainer: {
+    flex: 1,
+    position: "absolute",
+    left: "40%",
   },
   title: {
     fontWeight: 750,
@@ -74,13 +79,15 @@ const DonutChart = ({
               })}
             </g>
           </svg>
-          <div className={classes.label}>
-            {total > 1000 ? (total / 1000).toFixed(2) + "k" : total}
-          </div>
           <div className={classes.legendContainer}>
             {legendData.map((d, i) => {
               return (
-                <LegendItem key={`legend-${i}`} data={d} color={colors[i]} />
+                <LegendItem
+                  key={`legend-${i}`}
+                  data={d}
+                  color={colors[i]}
+                  percentageValue={d.percentageValue}
+                />
               );
             })}
           </div>
@@ -105,6 +112,6 @@ DonutChart.propTypes = {
 DonutChart.defaultProps = {
   outerRadius: 90,
   innerRadius: 60,
-  colors: ["#55B1F3", "#3A66BB", "#C4C4C4"],
+  colors: ["#FFA600", "#00568E", "#E0E0E0"],
 };
 export default withStyles(style)(DonutChart);
