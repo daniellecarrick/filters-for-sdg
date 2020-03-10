@@ -55,7 +55,6 @@ const DonutChart = ({
   data,
   legendData,
   colors,
-  valueInDonut,
 }) => {
   var pie = d3.pie().value(d => d.value)(data);
   var translate = `translate(130,130)`;
@@ -84,12 +83,7 @@ const DonutChart = ({
           <div className={classes.legendContainer}>
             {legendData.map((d, i) => {
               return (
-                <LegendItem
-                  key={`legend-${i}`}
-                  data={d}
-                  color={colors[i]}
-                  valueInDonut={valueInDonut}
-                />
+                <LegendItem key={`legend-${i}`} data={d} color={colors[i]} />
               );
             })}
           </div>
