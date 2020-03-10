@@ -28,8 +28,6 @@ export const affiliateConfig = {
   isSecure: true,
   port: 443,
   appname: "81299c2f-3215-4b51-9508-05f30fed058b",
-<<<<<<< HEAD
-=======
 };
 
 export const cneConfig = {
@@ -46,5 +44,4 @@ export const cmExecDashConfig = {
   isSecure: true,
   port: 443,
   appname: "26567b01-98b6-4228-9439-5514bd663ff7",
->>>>>>> origin/master
 };
