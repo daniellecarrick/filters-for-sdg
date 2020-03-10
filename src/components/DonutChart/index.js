@@ -109,6 +109,5 @@ DonutChart.defaultProps = {
   outerRadius: 90,
   innerRadius: 60,
   colors: ["#FFA600", "#00568E", "#E0E0E0"],
-  valueInDonut: true,
 };
 export default withStyles(style)(DonutChart);
