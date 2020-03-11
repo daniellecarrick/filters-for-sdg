@@ -1,11 +1,11 @@
 {
   "name": "dash-component-library",
-  "version": "0.5.12",
+  "version": "0.5.14",
   "description": "Component Library for Dash",
   "main": "index.js",
   "scripts": {
     "copy-package": "mkdir -p dist && cp package.json dist/",
-    "build:cjs": "babel ./src --out-dir dist --ignore node_modules,dist --copy-files",
+    "build:cjs": "babel src --out-dir dist --ignore node_modules,dist --copy-files",
     "bundle-dist": "node scripts/bundle-dist",
     "build:dist": "npm run copy-package && npm run build:cjs && npm run bundle-dist",
     "storybook": "start-storybook -p 3000",
