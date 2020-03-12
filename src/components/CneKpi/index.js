@@ -2,6 +2,7 @@ import React from "react";
 import withStyles from "react-jss";
 import Variance from "../Variance";
 import { Card } from "../index";
+import Tile from "./tile";
 import { formatNumber } from "../../utils/numberFormatting";
 
 const style = {
@@ -49,7 +50,7 @@ const CneKPI = ({
   time,
 }) => {
   return (
-    <Card wrapper={true}>
+    <Tile wrapper={true}>
       <div className={classes.kpiContainer}>
         <div className={dollar ? classes.dollarValue : classes.value}>
           {formatNumber(value, dollar, decimal, percentageValue, time)}
@@ -66,7 +67,7 @@ const CneKPI = ({
           />
         </div>
       </div>
-    </Card>
+    </Tile>
   );
 };
 
