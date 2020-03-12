@@ -5,7 +5,7 @@ import { qAsk } from "rxq";
 const useListBoxHandle = (
   fieldName,
   app$,
-  sortBy = { number: 0, alpha: 0, expression: 0 }
+  sortBy = { number: 0, alpha: 0 }
 ) => {
   const [value, setValue] = useState(null);
   const listBoxProps = {
