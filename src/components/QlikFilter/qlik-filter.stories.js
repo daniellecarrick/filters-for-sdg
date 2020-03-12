@@ -10,3 +10,9 @@ export const basic = () => (
     <QlikFilter fieldName="Network" displayName="Network" />
   </SessionProvider>
 );
+
+export const dates = () => (
+  <SessionProvider qlikConfig={affiliateConfig}>
+    <QlikFilter fieldName="Month" displayName="Month" sortBy={{ number: -1 }} />
+  </SessionProvider>
+);

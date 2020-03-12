@@ -172,19 +172,20 @@ const componentStyles = {
   },
 };
 
-const QlikFilterComponent = ({ classes, fieldName, displayName }) => {
+const QlikFilterComponent = ({ classes, fieldName, displayName, sortBy }) => {
   // get listbox layout and handle
   // const context = useContext(QlikContext);
   const {
     rxq: { doc$ },
   } = useSession()[0];
   // const handle = useListBoxHandle(fieldName, context.app$);
-  const handle = useListBoxHandle(fieldName, doc$);
+  const handle = useListBoxHandle(fieldName, doc$, sortBy);
+
   const [layout, layoutLoading] = useLayout(handle);
   const containerEl = useRef(null);
   const searchEl = useRef(null);
   const listEl = useRef(null);
-
+  console.log("layout", layout);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({ qMatrix: [], qTop: 0 });
 
