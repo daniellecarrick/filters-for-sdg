@@ -1,7 +1,6 @@
 import React from "react";
 import withStyles from "react-jss";
 import Variance from "../Variance";
-import { Card } from "../index";
 import Tile from "./tile";
 import { formatNumber } from "../../utils/numberFormatting";
 
