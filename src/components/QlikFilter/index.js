@@ -190,7 +190,6 @@ const QlikFilterComponent = ({
   const containerEl = useRef(null);
   const searchEl = useRef(null);
   const listEl = useRef(null);
-  console.log("layout", layout);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({ qMatrix: [], qTop: 0 });
 
