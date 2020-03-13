@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { CreateSessionObject } from "rxq/Doc";
 import { qAsk } from "rxq";
 
-const useListBoxHandle = (fieldName, app$) => {
+const useListBoxHandle = (
+  fieldName,
+  app$,
+  sortBy = { number: 0, alpha: 0 }
+) => {
   const [value, setValue] = useState(null);
   const listBoxProps = {
     qInfo: {
@@ -11,6 +15,16 @@ const useListBoxHandle = (fieldName, app$) => {
     qListObjectDef: {
       qDef: {
         qFieldDefs: [`${fieldName}`],
+        qSortCriterias: [
+          {
+            qSortByNumeric: sortBy.number,
+            qSortByAscii: sortBy.aplha,
+            // qSortByExpression: sortBy.expression,
+            // qExpression: {
+            //   qv: sortBy.expression,
+            // },
+          },
+        ],
       },
       qInitialDataFetch: [
         {

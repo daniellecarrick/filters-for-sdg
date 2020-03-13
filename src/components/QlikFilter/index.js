@@ -172,19 +172,24 @@ const componentStyles = {
   },
 };
 
-const QlikFilterComponent = ({ classes, fieldName, displayName }) => {
+const QlikFilterComponent = ({
+  classes,
+  fieldName,
+  displayName,
+  sortBy = { number: 0, alpha: 0 },
+}) => {
   // get listbox layout and handle
   // const context = useContext(QlikContext);
   const {
     rxq: { doc$ },
   } = useSession()[0];
   // const handle = useListBoxHandle(fieldName, context.app$);
-  const handle = useListBoxHandle(fieldName, doc$);
+  const handle = useListBoxHandle(fieldName, doc$, sortBy);
+
   const [layout, layoutLoading] = useLayout(handle);
   const containerEl = useRef(null);
   const searchEl = useRef(null);
   const listEl = useRef(null);
-
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({ qMatrix: [], qTop: 0 });
 
@@ -505,6 +510,11 @@ const QlikFilterComponent = ({ classes, fieldName, displayName }) => {
 
 QlikFilterComponent.propTypes = {
   fieldName: PropTypes.string,
+  // You can sort alphabetically or numerically. -1 for sorting descending (for example will sort dates by most recent), 0 for no sorting (default), 1 for sorting ascending
+  sortBy: PropTypes.shape({
+    number: PropTypes.oneOf([-1, 0, 1]),
+    alpha: PropTypes.oneOf([-1, 0, 1]),
+  }),
 };
 
 export default withStyles(componentStyles)(QlikFilterComponent);
