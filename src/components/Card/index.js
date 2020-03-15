@@ -13,6 +13,7 @@ const styles = {
     padding: "10px",
     margin: "10px 0",
     border: "none",
+    textAlign: "center",
   },
   card: {
     display: "flex",

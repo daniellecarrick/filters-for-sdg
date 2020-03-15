@@ -18,3 +18,15 @@ export const dollar = () => (
     />
   </>
 );
+export const large = () => (
+  <>
+    <CneKPI
+      value={99}
+      oldValue={64}
+      label={"Sample KPI"}
+      dollar={true}
+      kpiLarge={true}
+      percentageValue={99}
+    />
+  </>
+);

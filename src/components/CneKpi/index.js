@@ -20,10 +20,11 @@ const style = {
     fontSize: "20px",
     display: "inline-block",
   },
-  dollarValue: {
-    fontWeight: 500,
-    fontSize: "20px",
+  largeValue: {
+    fontWeight: 650,
+    fontSize: "30px",
     display: "inline-block",
+    marginLeft: "10px",
   },
   label: {
     color: "#4B4B4B",
@@ -47,11 +48,12 @@ const CneKPI = ({
   dollar,
   decimal,
   time,
+  kpiLarge,
 }) => {
   return (
-    <Card wrapper={true}>
+    <Card border={false}>
       <div className={classes.kpiContainer}>
-        <div className={dollar ? classes.dollarValue : classes.value}>
+        <div className={kpiLarge ? classes.largeValue : classes.value}>
           {formatNumber(value, dollar, decimal, percentageValue, time)}
         </div>{" "}
         <br />
