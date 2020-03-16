@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const numbersWithCommas = x => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
