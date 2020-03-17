@@ -51,24 +51,22 @@ const CneKPI = ({
   kpiLarge,
 }) => {
   return (
-    <Card border={false}>
-      <div className={classes.kpiContainer}>
-        <div className={kpiLarge ? classes.largeValue : classes.value}>
-          {formatNumber(value, dollar, decimal, percentageValue, time)}
-        </div>{" "}
-        <br />
-        <div className={classes.label}>{label}</div>
-        <br />
-        <div className={classes.variance}>
-          <Variance
-            className={classes.varianceBlock}
-            newValue={value}
-            oldValue={oldValue}
-            highColor={highColor}
-          />
-        </div>
+    <div className={classes.kpiContainer}>
+      <div className={kpiLarge ? classes.largeValue : classes.value}>
+        {formatNumber(value, dollar, decimal, percentageValue, time)}
+      </div>{" "}
+      <br />
+      <div className={classes.label}>{label}</div>
+      <br />
+      <div className={classes.variance}>
+        <Variance
+          className={classes.varianceBlock}
+          newValue={value}
+          oldValue={oldValue}
+          highColor={highColor}
+        />
       </div>
-    </Card>
+    </div>
   );
 };
 
