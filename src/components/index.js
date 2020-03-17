@@ -12,6 +12,8 @@ export { default as DonutChart } from "./DonutChart";
 export { default as DownloadButton } from "./DownloadButton";
 export { default as Dropdown } from "./Dropdown";
 export { default as Kpi } from "./Kpi";
+export { default as LegendItem } from "./ChartComponents";
+export { default as Arc } from "./ChartComponents";
 export { default as Menu } from "./DashMenu";
 export { default as MenuDrawer } from "./MenuDrawer";
 export { default as Navigator } from "./Navigator";

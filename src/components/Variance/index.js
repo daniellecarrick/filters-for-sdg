@@ -68,10 +68,10 @@ const Variance = ({
 };
 
 Variance.propTypes = {
-  /** New value is a number that denotes the current value */
-  newValue: PropTypes.number,
-  /** Old value is a number that denotes the value to a comparitively older timescale [previous year/previous month/previous week]*/
-  oldValue: PropTypes.number,
+  /** New value is a number/string that denotes the current value */
+  newValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** Old value is a number/string that denotes the value to a comparitively older timescale [previous year/previous month/previous week]*/
+  oldValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** High Color is a string that denotes the color of the indicator pill when the variance is high */
   highColor: PropTypes.string,
   /** Low Color is a string that denotes the color of the indicator pill when the variance is low */

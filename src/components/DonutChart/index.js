@@ -1,8 +1,7 @@
 import React from "react";
 import withStyles from "react-jss";
 import * as d3 from "d3";
-import Arc from "../ChartComponents/arc";
-import LegendItem from "../ChartComponents/legend-item";
+import { LegendItem, Arc } from "../ChartComponents";
 import PropTypes from "prop-types";
 
 const style = {
