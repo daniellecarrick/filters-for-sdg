@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const numbersWithCommas = x => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -17,9 +19,21 @@ const abbreviateNumber = num => {
 // Function to conver the number into K / Mn / Bn
 const formatNumber = (num, dollar, decimal, percentageValue, time) => {
   const roundOff = decimal ? decimal : 1;
-  var formattedNum = 0;
+  var formattedNum = 0,
+    formattedHrs = 0;
   if (time) {
-    return time;
+    const hours = time / 60;
+    if (hours < Math.pow(10, 3)) {
+      formattedHrs = hours.toFixed(0);
+    } else if (hours < Math.pow(10, 6)) {
+      formattedHrs = (hours / Math.pow(10, 3)).toFixed(0) + "K";
+    } else if (num < Math.pow(10, 9)) {
+      formattedHrs = (hours / Math.pow(10, 6)).toFixed(0) + "M";
+    } else if (num > Math.pow(10, 9)) {
+      formattedHrs = (hours / Math.pow(10, 9)).toFixed(0) + "B";
+    }
+    const minutes = time % 60;
+    return formattedHrs + " Hrs : " + minutes.toFixed(0) + " Mins";
   } else if (percentageValue) {
     return percentageValue + "%";
   } else {

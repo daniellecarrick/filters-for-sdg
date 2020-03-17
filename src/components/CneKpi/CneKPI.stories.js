@@ -30,3 +30,15 @@ export const large = () => (
     />
   </>
 );
+
+export const time = () => (
+  <>
+    <CneKPI
+      value={794673571}
+      oldValue={594673571}
+      label={"Sample KPI"}
+      time={794673571}
+    />
+  </>
+);
+
